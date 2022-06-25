@@ -96,16 +96,11 @@ function Main_Nav() {
                         
                         <Link href='/blog'><Nav.Link as={"a"} href="/blog">Blog</Nav.Link></Link>
                         <Link href='/contact'><Nav.Link as={"a"} href="/contact">Contact</Nav.Link></Link>
+
+                        <Link href='/signin'><Nav.Link as={"a"} href="/signin">Contul Meu</Nav.Link></Link>
+                        <Link href='/signup'><Nav.Link as={"a"} href="/signup">Inregistrare</Nav.Link></Link>
                     </Nav>
-                    <Form className="d-flex">
-                        <Form.Control
-                            type="search"
-                            placeholder="Cauta"
-                            className="me-2"
-                            aria-label="Search"
-                        />
-                        <Button variant="outline-success">Cauta</Button>
-                    </Form>
+
                 </Navbar.Collapse>
             </Container>
         </Navbar>
