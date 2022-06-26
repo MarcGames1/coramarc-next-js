@@ -82,6 +82,7 @@ const Signup = () => {
                 toast.error(data.error)
                 setLoading(false)
             } else{
+                console.log("SIGNUPRESPONSE => ", data)
                 toast.success("Inregistrat cu succes!");
                 setLoading(false)
             }
