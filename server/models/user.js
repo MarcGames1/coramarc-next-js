@@ -4,7 +4,12 @@ const { Schema } = mongoose;
 
 const userSchema = new Schema(
   {
-    name: {
+    nume: {
+      type: String,
+      trim: true,
+      required: true,
+    },
+    prenume: {
       type: String,
       trim: true,
       required: true,

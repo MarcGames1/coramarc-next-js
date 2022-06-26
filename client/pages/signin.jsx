@@ -6,6 +6,7 @@ import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
 import { useState } from 'react';
 import NavLink from 'react-bootstrap/NavLink';
+import Spinner from 'react-bootstrap/Spinner';
 
 import {
 
@@ -93,15 +94,15 @@ const handleChange= {
                         </Form.Group>
                                           
 
-                    <Button className="d-flex flex-center flex-direction-row" inline onSubmit={e =>{
+                    <Button loading className="d-flex flex-center flex-direction-row" inline onSubmit={e =>{
                         e.preventDefault();
                         console.log(e)
                     }} variant="primary" type="submit">
-                        Submit
+                        Submit 
                     </Button>
                 </Form>
                     <br></br>
-                        <Link href="/signup"><Button>Inregistrare</Button></Link>
+                        <Link href="/signup"><a>Inregistrare</a></Link>
                     
                     
             </Col>

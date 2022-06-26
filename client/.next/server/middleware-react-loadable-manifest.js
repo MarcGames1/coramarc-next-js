@@ -1,1 +1,1 @@
-self.__REACT_LOADABLE_MANIFEST={}
+self.__REACT_LOADABLE_MANIFEST={"signin.jsx -> @fortawesome/react-fontawesome":{"id":"signin.jsx -> @fortawesome/react-fontawesome","files":["static/chunks/node_modules_fortawesome_react-fontawesome_index_es_js.js"]},"signup.jsx -> @fortawesome/react-fontawesome":{"id":"signup.jsx -> @fortawesome/react-fontawesome","files":["static/chunks/node_modules_fortawesome_react-fontawesome_index_es_js.js"]}}

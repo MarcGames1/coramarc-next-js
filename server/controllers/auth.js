@@ -10,11 +10,12 @@ const sgMail = require("@sendgrid/mail");
 sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 export const signup = async (req, res) => {
-  console.log("HIT SIGNUP");
+  console.log("HIT SIGNUP", req.body);
+  
   try {
     // validation
-    const { name, email, password } = req.body;
-    if (!name) {
+    const { nume,prenume, email, password } = req.body;
+    if (!nume || !prenume) {
       return res.json({
         error: "Name is required",
       });
@@ -40,7 +41,8 @@ export const signup = async (req, res) => {
 
     try {
       const user = await new User({
-        name,
+        nume,
+        prenume,
         email,
         password: hashedPassword,
       }).save();
