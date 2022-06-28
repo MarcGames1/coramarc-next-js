@@ -19,20 +19,23 @@ import {
 //dynamic import fontawesome
 import dynamic from "next/dynamic";
 import Link from 'next/link';
+import toast from 'react-hot-toast';
+import axios from 'axios';
 
 const FontAwesomeIcon = dynamic(async () => (
     (await import("@fortawesome/react-fontawesome")).FontAwesomeIcon
 ));
-
 const Signin = () => {
+    
+    //state
     const [password, setPassword] = useState('password')
-
+    const [loading, setLoading] = useState(false)
 
     const showPassword = () => {
         password === "password" ? setPassword("text") : setPassword("password")
     }
 
-const [data, setData]= useState({
+const [inputData, setInputData]= useState({
     email:'',
     password:''
 })
@@ -41,24 +44,54 @@ const [data, setData]= useState({
 const handleChange= {
 
     email: (e) => {
-        setData(data, data.email = e.target.value)
-        console.log(data)
+        setInputData(inputData, inputData.email = e.target.value)
+        
     },
 
         password: (e) => {
-        setData(data, data.password = e.target.value)
-        console.log(data)
+            setInputData(inputData, inputData.password = e.target.value)
+        
+    },
+
+    submit_form: (e) =>{
+        e.preventDefault()
+        onFinish(inputData)
     }
+
 
 }
 
+
+const onFinish = async (values) => {
+    try {
+        setLoading(true)
+        const { data} = await axios.post('/signin', values)
+        console.log(data)
+        if(data?.error){
+            setLoading(false)
+            toast.error(data.error)
+            console.log(data)
+        } else{
+
+            toast.success("Successfully signed in")
+            setLoading(false)
+            console.log(data)
+        }
+
+    }
+    catch (err) {
+        toast.error('error => ', err)
+        setLoading(false)
+        console.log(data)
+    }
+}
     return (<>
 
 
         <Container fluid>
             <Row>
                 <Col lg={{ span: 6, offset: 3 }} sm={{ span: 10, offset: 1 }} md={{ span: 10, offset: 1 }}>
-                    <Form>
+                    <Form onSubmit={handleChange.submit_form}>
                         <Form.Group className="mb-3" controlId="formBasicEmail">
                             <Form.Label>Email address</Form.Label>
                             <InputGroup>
@@ -94,12 +127,9 @@ const handleChange= {
                         </Form.Group>
                                           
 
-                    <Button className="d-flex flex-center flex-direction-row" inline onSubmit={e =>{
-                        e.preventDefault();
-                        console.log(e)
-                    }} variant="primary" type="submit">
-                        Submit 
-                    </Button>
+                        <Button className="d-block mx-auto" variant="primary" disabled={loading} type="submit">
+                            {loading ? <>Logare <Spinner size={'sm'} animation="border" /> </> : "Logare"}
+                        </Button>
                 </Form>
                     <br></br>
                         <Link href="/signup"><a>Inregistrare</a></Link>
