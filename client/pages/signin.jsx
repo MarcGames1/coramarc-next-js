@@ -94,7 +94,7 @@ const handleChange= {
                         </Form.Group>
                                           
 
-                    <Button loading className="d-flex flex-center flex-direction-row" inline onSubmit={e =>{
+                    <Button className="d-flex flex-center flex-direction-row" inline onSubmit={e =>{
                         e.preventDefault();
                         console.log(e)
                     }} variant="primary" type="submit">

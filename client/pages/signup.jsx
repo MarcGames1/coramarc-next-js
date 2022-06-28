@@ -5,7 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import InputGroup from 'react-bootstrap/InputGroup';
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import {
@@ -19,18 +19,22 @@ import {
 //dynamic import fontawesome
 import dynamic from "next/dynamic";
 import Link from 'next/link';
+import { AuthContext } from '../context/auth';
 
 const FontAwesomeIcon = dynamic(async () => (
     (await import("@fortawesome/react-fontawesome")).FontAwesomeIcon
 ));
-
+import {useRouter} from 'next/router';
 
 
 
 const Signup = () => {
+    //Context
+    const [auth, setAuth] = useContext(AuthContext)
+    //state
     const [password, setPassword] = useState('password')
     const [loading, setLoading] =useState(false)
-
+    const router = useRouter()
   
     const [user_data, set_user_Data] = useState({
         email: '',
@@ -82,9 +86,15 @@ const Signup = () => {
                 toast.error(data.error)
                 setLoading(false)
             } else{
-                console.log("SIGNUPRESPONSE => ", data)
+                // save in context
+                setAuth(data)
+                //save in storage
+                localStorage.setItem('auth', JSON.stringify(data))
                 toast.success("Inregistrat cu succes!");
                 setLoading(false)
+                //redirect
+                router.push('/')
+
             }
         } catch (err) {
             toast.error("Signup Failed, try Again")
@@ -147,7 +157,7 @@ const Signup = () => {
                         </Row>
                         <Row className="g-2">
                         <Col>
-                        <Button className="d-block mx-auto" inline  variant="primary" disabled={loading} type="submit">
+                        <Button className="d-block mx-auto"  variant="primary" disabled={loading} type="submit">
                                   { loading ? <>Inregistrare <Spinner size={'sm'} animation="border" /> </> : "Inregistrare"}
                         </Button>
                     </Col>

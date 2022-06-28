@@ -9,8 +9,8 @@ config.autoAddCss = false
 function MyApp({ Component, pageProps }) {
     return(
         <>
-        <AuthProvider>
 
+        <AuthProvider>
         <Toaster />
         <Component {...pageProps} />
         </AuthProvider>
