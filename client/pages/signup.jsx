@@ -70,7 +70,7 @@ const Signup = () => {
 },
 
         submit: (e) => {
-            onFinish()
+            onFinish(user_data)
             e.preventDefault();
             
 }
@@ -78,10 +78,10 @@ const Signup = () => {
     }
 
 
-    const onFinish = async (value) => {
+    const onFinish = async (values) => {
         setLoading(true)
         try {
-            const { data } = await axios.post('/signup' , user_data)
+            const { data } = await axios.post('/signup' , values)
             if(data?.error){
                 toast.error(data.error)
                 setLoading(false)
