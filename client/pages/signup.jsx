@@ -81,7 +81,7 @@ const Signup = () => {
     const onFinish = async (value) => {
         setLoading(true)
         try {
-            const { data } = await axios.post('http://localhost:8000/api/signup', user_data)
+            const { data } = await axios.post('/signup' , user_data)
             if(data?.error){
                 toast.error(data.error)
                 setLoading(false)
@@ -93,7 +93,7 @@ const Signup = () => {
                 toast.success("Inregistrat cu succes!");
                 setLoading(false)
                 //redirect
-                router.push('/')
+                router.push('/admin')
 
             }
         } catch (err) {
