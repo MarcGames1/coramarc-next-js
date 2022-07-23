@@ -1,9 +1,9 @@
-import AdminNav from "../components/admin-nav/AdminNav";
+import AdminNav from "../components/admin//admin-nav/AdminNav";
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import React, { useState } from 'react'
-import AdminSidebar from '../components/admin-sidebar/AdminSidebar'
+import AdminSidebar from '../components/admin/admin-sidebar/AdminSidebar'
 import Button from 'react-bootstrap/Button';
 import Icon from '@mdi/react';
 import { mdiArrowRightDropCircle } from '@mdi/js';

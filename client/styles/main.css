@@ -8,4 +8,11 @@ root{
     background-color: var(--bs-secondary)
 }
 
+/* a {
+    cursor: pointer;
+} */
+
 /* LOGO SVG STYLE */
+a{
+    cursor: pointer;
+}

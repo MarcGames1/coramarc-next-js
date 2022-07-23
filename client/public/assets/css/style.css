@@ -27,9 +27,6 @@ Table of content
 23. footer
 -------------------------------------------------------------------*/
 /*------ Typography Style Start ------*/
-:root {
-  scroll-behavior: inherit;
-}
 
 body {
   color: #555555;
@@ -37,6 +34,7 @@ body {
   font-size: 16px;
   font-weight: 400;
   font-family: "Nunito Sans", sans-serif;
+   scroll-behavior: smooth;
 }
 
 a {
@@ -638,7 +636,7 @@ table tbody {
 }
 @media only screen and (max-width: 767.98px) {
   .scroll-top {
-    display: none;
+    /* display: none; */
   }
 }
 .scroll-top i {

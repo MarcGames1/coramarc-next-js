@@ -7,7 +7,8 @@ const router = express.Router();
 const {
   signup,
   signin,
-  forgotPassword,
+  signout,
+  // forgotPassword,
   resetPassword,
 } = require("../controllers/auth");
 
@@ -18,7 +19,8 @@ router.get("/", (req, res) => {
 });
 router.post("/signup", signup);
 router.post("/signin", signin);
-router.post("/forgot-password", forgotPassword);
+router.get('/signout', signout)
+// router.post("/forgot-password", forgotPassword);
 router.post("/reset-password", resetPassword);
 
 export default router;

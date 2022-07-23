@@ -1,4 +1,4 @@
-import AdminNav from "../../components/admin-nav/AdminNav"
+import AdminNav from "../../components/admin/admin-nav/AdminNav"
 import AdminLayout from "../../layout/AdminLayout"
 
 const Admin = () =>{

@@ -1,0 +1,29 @@
+.img{
+    filter:brightness(100%);
+
+}
+
+.text{
+    color:#87b106;
+    font-weight:bold;
+    
+    
+    
+    
+    /* border:1px solid #87b106; */
+    /* background-color: #87b10688; */
+}
+
+.caption{
+    
+     background-color: #87b10622; 
+     border-radius:50px;
+}
+
+
+
+@media only screen and (max-width:  768px){
+    .carousel{
+        display:none;
+    }
+}

@@ -2,12 +2,14 @@
 import User from "../models/user";
 import { hashPassword, comparePassword } from "../helpers/auth";
 import jwt from "jsonwebtoken";
+import  expressjwt  from 'express-jwt' 
+
 import nanoid from "nanoid";
 
 // sendgrid
 require("dotenv").config();
-const sgMail = require("@sendgrid/mail");
-sgMail.setApiKey(process.env.SENDGRID_KEY);
+// const sgMail = require("@sendgrid/mail");
+// sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 export const signup = async (req, res) => {
   console.log("HIT SIGNUP", req.body);
@@ -88,6 +90,9 @@ export const signin = async (req, res) => {
     const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
+    //persist the token as "t" in cookie with expiration time
+
+    res.cookie("t", token, { expire: new Date() + 9999 })
 
     user.password = undefined;
     user.secret = undefined;
@@ -101,36 +106,41 @@ export const signin = async (req, res) => {
   }
 };
 
-export const forgotPassword = async (req, res) => {
-  const { email } = req.body;
-  // find user by email
-  const user = await User.findOne({ email });
-  console.log("USER ===> ", user);
-  if (!user) {
-    return res.json({ error: "User not found" });
-  }
+export const signout = (req, res) => {
+  res.clearCookie('t')
+  res.json({ message: "Signout Successfully" })
+}
+
+// export const forgotPassword = async (req, res) => {
+//   const { email } = req.body;
+//   // find user by email
+//   const user = await User.findOne({ email });
+//   console.log("USER ===> ", user);
+//   if (!user) {
+//     return res.json({ error: "User not found" });
+//   }
   // generate code
-  const resetCode = nanoid(5).toUpperCase();
-  // save to db
-  user.resetCode = resetCode;
-  user.save();
-  // prepare email
-  const emailData = {
-    from: process.env.EMAIL_FROM,
-    to: user.email,
-    subject: "Password reset code",
-    html: "<h1>Your password  reset code is: {resetCode}</h1>"
-  };
+  // const resetCode = nanoid(5).toUpperCase();
+  // // save to db
+  // user.resetCode = resetCode;
+  // user.save();
+  // // prepare email
+  // const emailData = {
+  //   from: process.env.EMAIL_FROM,
+  //   to: user.email,
+  //   subject: "Password reset code",
+  //   html: "<h1>Your password  reset code is: {resetCode}</h1>"
+  // };
   // send email
-  try {
-    const data = await sgMail.send(emailData);
-    console.log(data);
-    res.json({ ok: true });
-  } catch (err) {
-    console.log(err);
-    res.json({ ok: false });
-  }
-};
+//   try {
+//     const data = await sgMail.send(emailData);
+//     console.log(data);
+//     res.json({ ok: true });
+//   } catch (err) {
+//     console.log(err);
+//     res.json({ ok: false });
+//   }
+// };
 
 export const resetPassword = async (req, res) => {
   try {
@@ -157,3 +167,29 @@ export const resetPassword = async (req, res) => {
     console.log(err);
   }
 };
+
+
+export const isAuth = (req, res, next) => {
+  let user = req.profile && req.auth && req.profile._id == req.auth._id
+  if (!user) {
+    return res.status(403).json({
+      error: "Acces denied"
+    })
+  }
+  next()
+};
+
+export const isAdmin = (req, res, next ) => {
+  if (req.profile.role === 0) {
+    return res.status(403).json({
+      error: "Admin Resourse! Acces denied"
+    })
+  }
+  next()
+};
+
+export const requireSignin = expressjwt({
+  secret: process.env.JWT_SECRET,
+  userProperty: "auth",
+  algorithms: ["HS256"],
+})
