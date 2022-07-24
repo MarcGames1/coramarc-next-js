@@ -180,7 +180,8 @@ export const isAuth = (req, res, next) => {
 };
 
 export const isAdmin = (req, res, next ) => {
-  if (req.profile.role === 0) {
+  console.log(req.profile.role)
+  if (req.profile.role !== "Admin") {
     return res.status(403).json({
       error: "Admin Resourse! Acces denied"
     })
