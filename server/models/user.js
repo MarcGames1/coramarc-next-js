@@ -1,8 +1,8 @@
 
-import mongoose from "mongoose";
-const { Schema } = mongoose;
+const mongoose = require('mongoose');
 
-const userSchema = new Schema(
+
+const userSchema = new mongoose.Schema(
   {
     nume: {
       type: String,
@@ -28,15 +28,15 @@ const userSchema = new Schema(
     },
     role: {
       type: String,
-      default: "Subscriber",
+      default: 'Subscriber',
     },
     image: {
-      public_id: "",
-      url: "",
+      public_id: '',
+      url: '',
     },
-    resetCode: "",
+    resetCode: '',
   },
   { timestamps: true }
 );
 
-export default mongoose.model("User", userSchema);
+    module.exports = mongoose.model('User', userSchema);

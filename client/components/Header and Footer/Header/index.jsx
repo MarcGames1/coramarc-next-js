@@ -3,8 +3,6 @@ import {OffcanvasSearchForm} from "../../OffCanvas";
 import { OffCanvasSearchContextProvider } from "../../../context/offCanvasSearchContext/offCanvasSearchContext";
 
 
-
-
 export default function Header() {
 
 
@@ -17,6 +15,7 @@ export default function Header() {
             <M_Header />
             <OffcanvasSearchForm />
         </OffCanvasSearchContextProvider>
+        
 
     </>
 

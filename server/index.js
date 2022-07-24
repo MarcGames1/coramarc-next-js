@@ -16,7 +16,7 @@ import authRoutes from "./routes/auth";
 import userRoutes from "./routes/user"
 import categoryRoutes from "./routes/category"
 import productRoutes from "./routes/product"
-
+import blogRoutes from "./routes/blog-category";
 const app = express();
 
 // db connection
@@ -39,6 +39,7 @@ app.use("/api", authRoutes);
 app.use('/api/', userRoutes)
 app.use('/api/', categoryRoutes)
 app.use('/api/', productRoutes)
+app.use('/api/', blogRoutes);
 
 
 const port = process.env.port || 8000

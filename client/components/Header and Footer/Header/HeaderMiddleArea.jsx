@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import {useState, useEffect, useContext } from "react"
 import { OffCanvasSearchContext } from "../../../context/offCanvasSearchContext/offCanvasSearchContext"
 import { ScrollPosition } from "../../../context/ScrollPositionContext/ScrollPositionContext"
@@ -29,28 +30,28 @@ const  HeaderMiddleArea = () =>{
 
     return(<>
         {/* <!-- header middle area start --> */}
-        <div class={`header-main-area black-soft ${sticky}`}>
-            <div class="container">
-                <div class="row align-items-center position-relative">
+        <div className={`header-main-area black-soft sticky  ${sticky}`}>
+            <div className="container">
+                <div className="row align-items-center position-relative">
                     {/* <!-- start logo area --> */}
-                    <div class="col-auto">
-                        <div class="logo">
-                            <a href="index.html">
-                                <img src="assets/img/logo/logo.png" alt="Brand Logo" />
-                            </a>
+                    <div className="col-auto">
+                        <div className="logo">
+                            <Link href="/">
+                                <a href="/"><img src="/assets/img/logo/logo.png" alt="Coramarc Logo" /></a>
+                            </Link>
                         </div>
                     </div>
                     {/* <!-- start logo area --> */}
 
                     {/* <!-- main menu area start --> */}
-                    <div class="col-auto position-static">
-                        <div class="main-menu-area">
-                            <div class="main-menu">
+                    <div className="col-auto position-static">
+                        <div className="main-menu-area">
+                            <div className="main-menu">
                                 {/* <!-- main menu navbar start --> */}
-                                <nav class="desktop-menu">
+                                <nav className="desktop-menu">
                                     <ul>
-                                        <li class="active"><a href="index.html">Home <i class="fa fa-angle-down"></i></a>
-                                            <ul class="dropdown">
+                                        <li className="active"><a href="index.html">Home <i className="fa fa-angle-down"></i></a>
+                                            <ul className="dropdown">
                                                 <li><a href="index.html">Home version 01</a></li>
                                                 <li><a href="index-2.html">Home version 02</a></li>
                                                 <li><a href="index-3.html">Home version 03</a></li>
@@ -59,9 +60,9 @@ const  HeaderMiddleArea = () =>{
                                                 <li><a href="index-6.html">Home version 06</a></li>
                                             </ul>
                                         </li>
-                                        <li class="position-static"><a href="#">pages <i class="fa fa-angle-down"></i></a>
-                                            <ul class="megamenu dropdown">
-                                                <li class="mega-title"><span>column 01</span>
+                                        <li className="position-static"><a href="#">pages <i className="fa fa-angle-down"></i></a>
+                                            <ul className="megamenu dropdown">
+                                                <li className="mega-title"><span>column 01</span>
                                                     <ul>
                                                         <li><a href="shop.html">shop grid left
                                                             sidebar</a></li>
@@ -71,7 +72,7 @@ const  HeaderMiddleArea = () =>{
                                                         <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
                                                     </ul>
                                                 </li>
-                                                <li class="mega-title"><span>column 02</span>
+                                                <li className="mega-title"><span>column 02</span>
                                                     <ul>
                                                         <li><a href="product-details.html">product details</a></li>
                                                         <li><a href="product-details-affiliate.html">product
@@ -83,7 +84,7 @@ const  HeaderMiddleArea = () =>{
                                                             group</a></li>
                                                     </ul>
                                                 </li>
-                                                <li class="mega-title"><span>column 03</span>
+                                                <li className="mega-title"><span>column 03</span>
                                                     <ul>
                                                         <li><a href="cart.html">cart</a></li>
                                                         <li><a href="checkout.html">checkout</a></li>
@@ -91,7 +92,7 @@ const  HeaderMiddleArea = () =>{
                                                         <li><a href="wishlist.html">wishlist</a></li>
                                                     </ul>
                                                 </li>
-                                                <li class="mega-title"><span>column 04</span>
+                                                <li className="mega-title"><span>column 04</span>
                                                     <ul>
                                                         <li><a href="my-account.html">my-account</a></li>
                                                         <li><a href="login-register.html">login-register</a></li>
@@ -101,25 +102,25 @@ const  HeaderMiddleArea = () =>{
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li><a href="shop.html">shop <i class="fa fa-angle-down"></i></a>
-                                            <ul class="dropdown">
-                                                <li><a href="#">shop grid layout <i class="fa fa-angle-right"></i></a>
-                                                    <ul class="dropdown">
+                                        <li><a href="shop.html">shop <i className="fa fa-angle-down"></i></a>
+                                            <ul className="dropdown">
+                                                <li><a href="#">shop grid layout <i className="fa fa-angle-right"></i></a>
+                                                    <ul className="dropdown">
                                                         <li><a href="shop.html">shop grid left sidebar</a></li>
                                                         <li><a href="shop-grid-right-sidebar.html">shop grid right sidebar</a></li>
                                                         <li><a href="shop-grid-full-3-col.html">shop grid full 3 col</a></li>
                                                         <li><a href="shop-grid-full-4-col.html">shop grid full 4 col</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">shop list layout <i class="fa fa-angle-right"></i></a>
-                                                    <ul class="dropdown">
+                                                <li><a href="#">shop list layout <i className="fa fa-angle-right"></i></a>
+                                                    <ul className="dropdown">
                                                         <li><a href="shop-list-left-sidebar.html">shop list left sidebar</a></li>
                                                         <li><a href="shop-list-right-sidebar.html">shop list right sidebar</a></li>
                                                         <li><a href="shop-list-full-width.html">shop list full width</a></li>
                                                     </ul>
                                                 </li>
-                                                <li><a href="#">products details <i class="fa fa-angle-right"></i></a>
-                                                    <ul class="dropdown">
+                                                <li><a href="#">products details <i className="fa fa-angle-right"></i></a>
+                                                    <ul className="dropdown">
                                                         <li><a href="product-details.html">product details</a></li>
                                                         <li><a href="product-details-affiliate.html">product details affiliate</a></li>
                                                         <li><a href="product-details-variable.html">product details variable</a></li>
@@ -128,8 +129,8 @@ const  HeaderMiddleArea = () =>{
                                                 </li>
                                             </ul>
                                         </li>
-                                        <li><a href="blog-left-sidebar.html">Blog <i class="fa fa-angle-down"></i></a>
-                                            <ul class="dropdown">
+                                        <li><a href="blog-left-sidebar.html">Blog <i className="fa fa-angle-down"></i></a>
+                                            <ul className="dropdown">
                                                 <li><a href="blog-left-sidebar.html">blog left sidebar</a></li>
                                                 <li><a href="blog-list-left-sidebar.html">blog list left sidebar</a></li>
                                                 <li><a href="blog-right-sidebar.html">blog right sidebar</a></li>
@@ -152,48 +153,48 @@ const  HeaderMiddleArea = () =>{
                     {/* <!-- main menu area end --> */}
 
                     {/* <!-- mini cart area start --> */}
-                    <div class="col-auto ms-auto">
-                        <div class="header-right">
-                            <div class="header-configure-area">
-                                <ul class="nav">
+                    <div className="col-auto ms-auto">
+                        <div className="header-right">
+                            <div className="header-configure-area">
+                                <ul className="nav">
                                     <li>
-                                        <a onClick={showSearch} className="search-trigger"><i class="fa fa-search"></i></a>
+                                        <a onClick={showSearch} className="search-trigger"><i className="fa fa-search"></i></a>
                                     </li>
-                                    <li class="mini-cart-wrap">
-                                        <a href="#" class="minicart-btn">
-                                            <i class="fa fa-shopping-cart"></i>
-                                            <span class="notification">2</span>
+                                    <li className="mini-cart-wrap">
+                                        <a href="#" className="minicart-btn">
+                                            <i className="fa fa-shopping-cart"></i>
+                                            <span className="notification">2</span>
                                         </a>
-                                        <div class="cart-list-wrapper">
-                                            <ul class="cart-list">
+                                        <div className="cart-list-wrapper">
+                                            <ul className="cart-list">
                                                 <li>
-                                                    <div class="cart-img">
+                                                    <div className="cart-img">
                                                         <a href="product-details.html"><img src="assets/img/cart/cart-1.jpg" alt="" /></a>
                                                     </div>
-                                                    <div class="cart-info">
-                                                        <h6 class="product-name"><a href="product-details.html">7th Generation classic</a></h6>
-                                                        <span class="cart-qty">Qty: 1</span>
-                                                        <span class="item-price">$60.00</span>
+                                                    <div className="cart-info">
+                                                        <h6 className="product-name"><a href="product-details.html">7th Generation classic</a></h6>
+                                                        <span className="cart-qty">Qty: 1</span>
+                                                        <span className="item-price">$60.00</span>
                                                     </div>
-                                                    <div class="del-icon">
-                                                        <i class="fa fa-times"></i>
+                                                    <div className="del-icon">
+                                                        <i className="fa fa-times"></i>
                                                     </div>
                                                 </li>
                                                 <li>
-                                                    <div class="cart-img">
+                                                    <div className="cart-img">
                                                         <a href="product-details.html"><img src="assets/img/cart/cart-2.jpg" alt="" /></a>
                                                     </div>
-                                                    <div class="cart-info">
-                                                        <h6 class="product-name"><a href="product-details.html">Digital 8th generation</a></h6>
-                                                        <span class="cart-qty">Qty: 2</span>
-                                                        <span class="item-price">$70.00</span>
+                                                    <div className="cart-info">
+                                                        <h6 className="product-name"><a href="product-details.html">Digital 8th generation</a></h6>
+                                                        <span className="cart-qty">Qty: 2</span>
+                                                        <span className="item-price">$70.00</span>
                                                     </div>
-                                                    <div class="del-icon">
-                                                        <i class="fa fa-times"></i>
+                                                    <div className="del-icon">
+                                                        <i className="fa fa-times"></i>
                                                     </div>
                                                 </li>
                                             </ul>
-                                            <ul class="minicart-pricing-box">
+                                            <ul className="minicart-pricing-box">
                                                 <li>
                                                     <span>Sub-Total</span>
                                                     <span><strong>$300.00</strong></span>
@@ -206,14 +207,14 @@ const  HeaderMiddleArea = () =>{
                                                     <span>VAT (20%)</span>
                                                     <span><strong>$60.00</strong></span>
                                                 </li>
-                                                <li class="total">
+                                                <li className="total">
                                                     <span>Total</span>
                                                     <span><strong>$370.00</strong></span>
                                                 </li>
                                             </ul>
-                                            <div class="minicart-button">
-                                                <a href="cart.html"><i class="fa fa-shopping-cart"></i> View Cart</a>
-                                                <a href="cart.html"><i class="fa fa-share"></i> Checkout</a>
+                                            <div className="minicart-button">
+                                                <a href="cart.html"><i className="fa fa-shopping-cart"></i> View Cart</a>
+                                                <a href="cart.html"><i className="fa fa-share"></i> Checkout</a>
                                             </div>
                                         </div>
                                     </li>

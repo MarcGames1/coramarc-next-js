@@ -1,6 +1,14 @@
+import MainLayout from "../../layout/MainLayout"
+
 const Blog = () => {
 
-    return <h1>Blog</h1>
+    return (<>
+    <MainLayout>
+
+    <h1>Blog</h1>
+    
+    </MainLayout>
+    </>)
 }
 
 export default Blog

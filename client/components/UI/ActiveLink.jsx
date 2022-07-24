@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import Nav from 'react-bootstrap/Nav'
 
-import Icon from '@mdi/react'
+
 const ActiveLink = (props) => {
 
 

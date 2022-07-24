@@ -16,3 +16,18 @@ root{
 a{
     cursor: pointer;
 }
+
+
+
+///MENU
+
+
+.main-menu ul li ul.dropdown li:hover > a:before {
+  opacity: 1;
+  visibility: visible  !important;
+}
+.main-menu ul li ul.dropdown li:hover > ul.dropdown {
+  top: 0;
+  opacity: 1;
+  visibility: visible !important;
+}
