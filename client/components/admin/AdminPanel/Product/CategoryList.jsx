@@ -17,62 +17,32 @@ import {
 import axios from 'axios';
 import { useState, useEffect, useContext } from 'react';
 import { AuthContext } from '../../../../context/auth';
-// import {}
+import { CategoryContext } from './categoryContext/categoryContext';
+import CategoryListElement from './CategoryListElement';
 
-
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
 
 
 
 const CategoryList = () => {
+  const [categories, setCategories, getCategories] = useContext(CategoryContext);
 
-const { data, error } = useSWR(
-  `${process.env.NEXT_PUBLIC_API}/categories`,
-  fetcher
-);
+
  
 
 const [auth, setAuth] =useContext(AuthContext)
 
-  const handler = {
-    
-    delete: async ( categoryId ) => {
-       
-        let url = `/category/${categoryId}/${auth.user._id}`;
-        console.log("URL +> ", url)
-        // error handling + mesaj feedback cu TOAST
-            await axios.delete(url)
 
-
-    
-    },
-  };
 
   
 
 
-  if (error) return <div>Failed to load</div>;
-  if (!data) return <div>Loading...</div>;
+  
+  if (!categories) return <div>Loading...</div>;
   return (
     <>
-      {data?.map((cat) => {
+      {categories?.map((cat) => {
         return (
-          <Alert action variant="primary" key={cat._id}>
-            <Row>
-              <Col>{cat.name}</Col>
-              <Col>
-                <ButtonGroup size="sm" className="mb-2">
-                  <Button onClick={()=>{
-                        handler.delete(cat._id)
-                    }
-                  }  variant="danger">
-                    <FontAwesomeIcon icon={faCircleXmark} /> Sterge
-                  </Button>
-                  <Button variant="warning">Modifica</Button>
-                </ButtonGroup>
-              </Col>
-            </Row>
-          </Alert>
+          <CategoryListElement key={cat._id} {...cat}  />
         );
       })}
     </>

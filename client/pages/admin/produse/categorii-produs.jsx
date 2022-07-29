@@ -14,7 +14,11 @@ import {
 
 
 
-import {CategoryList, CreateCategoryForm} from '../../../components/admin/AdminPanel';
+import {
+  CategoryList,
+  CategoryProvider,
+  CreateCategoryForm
+  } from '../../../components/admin/AdminPanel';
 
 
 const CategoriiProdus = () => {
@@ -28,6 +32,8 @@ const CategoriiProdus = () => {
 
   return (
     <AdminLayout>
+      <CategoryProvider >
+
       <h1>Categorii Produs</h1>
       <Row>
         <Col>
@@ -39,6 +45,7 @@ const CategoriiProdus = () => {
             <CreateCategoryForm />
         </Col>
       </Row>
+      </CategoryProvider>
     </AdminLayout>
   );
 };

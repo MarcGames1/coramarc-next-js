@@ -9,11 +9,12 @@ import toast from 'react-hot-toast';
 import { AuthContext } from '../../../../context/auth';
 import { Form, InputGroup } from 'react-bootstrap';
 import LoadingBtn from "../../../UI/LoadingBtn";
-
+import { CategoryContext } from './categoryContext/categoryContext';
 
 const CreateCategoryForm = () => {
 
   const [auth, setAuth] = useContext(AuthContext);
+  const [categories, setCategories, getCategories] = useContext(CategoryContext);
 
   //state
   const [loading, setLoading] = useState(false);
@@ -52,6 +53,7 @@ const CreateCategoryForm = () => {
         toast.success('Categorie Creata cu Succes');
         setLoading(false);
         console.log(data);
+        getCategories()
       }
     } catch (err) {
       toast.error('error => ', err);
