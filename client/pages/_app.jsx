@@ -8,6 +8,8 @@ import '@fortawesome/fontawesome-svg-core/styles.css'
 import {Toaster} from 'react-hot-toast'
 import { AuthProvider } from '../context/auth';
 import 'nextjs-breadcrumbs/dist/index.css'
+import 'react-quill/dist/quill.snow.css';
+
 
 config.autoAddCss = false
 function MyApp({ Component, pageProps }) {

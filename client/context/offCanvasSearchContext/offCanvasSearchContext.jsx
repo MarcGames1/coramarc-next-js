@@ -17,7 +17,7 @@ const OffCanvasSearchContext = createContext();
      }
     useEffect(() =>{
         if (typeof window !== "undefined") {
-       console.log(show)
+      
             // Client-side-only code
         window.addEventListener('keydown', escKeyPressEventSearch)
         }
