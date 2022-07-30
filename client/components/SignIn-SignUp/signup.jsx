@@ -94,7 +94,7 @@ const Signup = () => {
                 toast.success("Inregistrat cu succes!");
                 setLoading(false)
                 //redirect
-                router.push('/admin')
+                router.push('/')
 
             }
         } catch (err) {

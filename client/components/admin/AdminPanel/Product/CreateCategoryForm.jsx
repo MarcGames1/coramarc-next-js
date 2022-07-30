@@ -32,6 +32,7 @@ const CreateCategoryForm = () => {
     submit_form: (e) => {
       e.preventDefault();
       onFinish(inputCategory);
+      
     },
   };
 

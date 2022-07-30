@@ -1,4 +1,5 @@
 const Category = require("../models/category")
+import slugify from 'slugify';
 
 exports.categoryById = (req, res, next, id) => {
     Category.findById(id).exec((err, category) =>{
@@ -14,14 +15,18 @@ exports.categoryById = (req, res, next, id) => {
 
 
 exports.create = async (req, res) =>{
-    const category = await new Category(req.body)
+   const { name } = req.body;
+    const category = await new Category({
+      name,
+      slug: slugify(name),
+    });
     category.save((err, data)=>{
         if(err){
             return res.status(400).json({
                 error: "Something went wrong"
             })
         }
-
+        
         res.status(200).json( data )
         
     })
@@ -60,7 +65,7 @@ exports.remove = (req, res) => {
 }
 
 exports.list = (req, res) => {
-    Category.find().exec((err, data)=>{
+    Category.find().sort({createdAt: -1}).exec((err, data)=>{
         if(err){
             return res.status(400).json({error: "Something went wrong listing the categories"})
         }

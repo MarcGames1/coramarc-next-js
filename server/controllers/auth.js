@@ -3,11 +3,11 @@ import User from "../models/user";
 import { hashPassword, comparePassword } from "../helpers/auth";
 import jwt from "jsonwebtoken";
 import  expressjwt  from 'express-jwt' 
+require('dotenv').config();
 
-import nanoid from "nanoid";
 
 // sendgrid
-require("dotenv").config();
+
 // const sgMail = require("@sendgrid/mail");
 // sgMail.setApiKey(process.env.SENDGRID_KEY);
 
@@ -51,7 +51,7 @@ export const signup = async (req, res) => {
 
       // create signed token
       const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-        expiresIn: "7d",
+        expiresIn: '7d',
       });
 
       //   console.log(user);
@@ -169,28 +169,47 @@ export const resetPassword = async (req, res) => {
 };
 
 
-export const isAuth = (req, res, next) => {
-  let user = req.profile && req.auth && req.profile._id == req.auth._id
-  if (!user) {
-    return res.status(403).json({
-      error: "Acces denied"
-    })
+export const isAuth = async (req, res, next) => {
+
+  try{
+     const user = await User.findById(req.user._id);
+     if(!user) {
+      return res.status(404).json({error: "User Not Found!"})
+     }
+     else{
+      next()
+     }
+  } catch (err) {
+    console.log (err);
+    return res.status(500).json({ error: err})
   }
-  next()
 };
 
-export const isAdmin = (req, res, next ) => {
-  console.log(req.profile.role)
-  if (req.profile.role !== "Admin") {
-    return res.status(403).json({
-      error: "Admin Resourse! Acces denied"
-    })
+export const isAdmin = async (req, res, next) => {
+  try {
+    const user = await User.findById(req.user._id);
+    if (user.role !== 'Admin') {
+      return res.status(403).send('Unauhorized');
+    } else {
+      next();
+    }
+  } catch (err) {
+    console.log(err);
   }
-  next()
 };
 
 export const requireSignin = expressjwt({
   secret: process.env.JWT_SECRET,
-  userProperty: "auth",
+  // userProperty: "auth",
   algorithms: ["HS256"],
 })
+
+
+export const currentUser = async (req, res) => {
+  try {
+    // const user = await User.findById(req.user._id);
+    res.json({ ok: true });
+  } catch (err) {
+    console.log(err);
+  }
+};

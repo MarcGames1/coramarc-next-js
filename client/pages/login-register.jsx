@@ -2,9 +2,19 @@ import { Signin, Signup } from "../components/SignIn-SignUp"
 import { Container, Row, Col, Card, CardGroup } from "react-bootstrap"
 import MainLayout from "../Layout/MainLayout"
 import Breadcrumbs from "nextjs-breadcrumbs";
+import {useEffect, useContext, useState} from 'react'
+import { useRouter } from "next/router";
+import { AuthContext } from "../context/auth";
 const Login_register = () =>{
 
+  const [auth] = useContext(AuthContext)
 
+  const router = useRouter()
+useEffect(()=>{
+  if(auth?.token){
+    router.push('/')
+  }
+},[auth?.user])
     return (
       <MainLayout>
         <div className="login-register-wrapper ">

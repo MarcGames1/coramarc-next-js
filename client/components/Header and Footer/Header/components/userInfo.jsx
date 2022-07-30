@@ -5,6 +5,11 @@ import { AuthContext } from '../../../../context/auth';
 
 // import { useRouter } from 'next/router';
 import router from 'next/router';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+
+
+
 export const UserInfo = () => {
     const Signout = () =>{
 
@@ -45,6 +50,7 @@ export const UserInfo = () => {
   };
 
   const SignOutUser = () =>{
+    axios.get('/signout')
       setAuth({
           user:"",
           token:"",

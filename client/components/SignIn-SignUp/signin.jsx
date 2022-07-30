@@ -6,11 +6,11 @@ import InputGroup from 'react-bootstrap/InputGroup';
 import { useState, useContext } from 'react';
 import LoadingBtn from '../UI/LoadingBtn'
 import {
-
-    faEyeSlash,
-    faEye,
-    faEnvelope
-
+  
+  faEyeSlash,
+  faEye,
+  faEnvelope
+  
 } from "@fortawesome/free-solid-svg-icons";
 
 //dynamic import fontawesome
@@ -19,10 +19,11 @@ import toast from 'react-hot-toast';
 import axios from 'axios';
 
 const FontAwesomeIcon = dynamic(async () => (
-    (await import("@fortawesome/react-fontawesome")).FontAwesomeIcon
-));
-const Signin = () => {
-  // context
+  (await import("@fortawesome/react-fontawesome")).FontAwesomeIcon
+  ));
+  const Signin = () => {
+    const router = useRouter()
+    // context
   const [auth, setAuth] = useContext(AuthContext);
 
   //state
@@ -65,6 +66,7 @@ const Signin = () => {
       } else {
         // save user and token to context
         setAuth(data);
+        router.push('/')
         // save user and token to local storage
         localStorage.setItem('auth', JSON.stringify(data));
 
@@ -73,9 +75,9 @@ const Signin = () => {
         console.log(data);
       }
     } catch (err) {
-      toast.error('error => ', err);
+      toast.error('error => ', err.message);
       setLoading(false);
-      console.log(data);
+      console.log(err);
     }
   };
   return (
