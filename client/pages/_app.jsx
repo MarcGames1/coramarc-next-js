@@ -9,6 +9,8 @@ import {Toaster} from 'react-hot-toast'
 import { AuthProvider } from '../context/auth';
 import 'nextjs-breadcrumbs/dist/index.css'
 import 'react-quill/dist/quill.snow.css';
+import 'react-quill/dist/quill.core.css';
+
 
 
 config.autoAddCss = false

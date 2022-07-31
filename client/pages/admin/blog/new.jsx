@@ -1,6 +1,7 @@
 import AdminLayout from '../../../layout/AdminLayout'
 import dynamic from 'next/dynamic';
 import React, { useState, useEffect } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 const ReactQuill = dynamic(import('react-quill'), {	
 	ssr: false,
 	loading: () => <p>Loading ...</p>,
@@ -81,7 +82,20 @@ function NewPost () {
         {loading ? (
           'Loading... '
         ) : (
-          <ReactQuill modules={modules} formats={formats} theme="snow" value={content}  onChange={setContent} />
+          <>
+            <br />
+            <div className="ql-content" dangerouslySetInnerHTML={{ __html: content }}></div>
+              
+                <ReactQuill
+                  modules={modules}
+                  formats={formats}
+                  theme="snow"
+                  value={content}
+                  onChange={setContent}
+                />
+              
+            
+          </>
         )}
       </AdminLayout>
     );
