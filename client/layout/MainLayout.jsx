@@ -5,20 +5,24 @@ import Breadcrumbs from 'nextjs-breadcrumbs'
 
 const MainLayout = (props) =>{
 
-return(<>
-<ScrollPositionProvider>
+return (
+  <>
+    <ScrollPositionProvider>
+      <Header />
 
-    <Header />
- 
-        <Breadcrumbs rootLabel="Acasa" useDefaultStyle={true} />
-        
-    <main className="main-layout m-1">
-    {props.children}
-    </main>   
-    <MainFooter />
-</ScrollPositionProvider>
-   
-</>)
+      <Breadcrumbs
+        rootLabel="Acasa"
+        containerClassName="p-3 breadcrumb-wrap black-bg"
+        listClassName="breadcrumb"
+        inactiveItemClassName="breadcrumb-item"
+        activeItemClassName="breadcrumb-item active"
+      />
+
+      <main className="main-layout m-1">{props.children}</main>
+      <MainFooter />
+    </ScrollPositionProvider>
+  </>
+);
 }
 
 export default MainLayout

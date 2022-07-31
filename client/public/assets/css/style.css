@@ -4591,7 +4591,7 @@ ul.minicart-pricing-box li:last-child {
 }
 .breadcrumb-wrap .breadcrumb .breadcrumb-item:before {
   color: var(--bs-white);
-  content: '/';
+  content: ' ';
   font-size: 12px;
   margin: 0 5px;
 }
@@ -7091,3 +7091,9 @@ blockquote {
 
 /*----- footer area end -----*/
 /*# sourceMappingURL=style.css.map */
+
+
+
+.ql-editor{
+  min-height:300px
+}

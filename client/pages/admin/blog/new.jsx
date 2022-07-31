@@ -10,7 +10,7 @@ const ReactQuill = dynamic(import('react-quill'), {
 
 
 function NewPost () {
-    const [value, setValue] = useState('');
+    const [content, setContent] = useState('');
     const [loading, setLoading] = useState(true)
 
     const formats = [
@@ -68,10 +68,10 @@ function NewPost () {
     useEffect(()=>{
         if (typeof window !== 'undefined') {
           setLoading(false);
-          console.log(value)
+          console.log(content)
         }
 
-    }, [value])
+    }, [content])
     
 
     return (
@@ -81,7 +81,7 @@ function NewPost () {
         {loading ? (
           'Loading... '
         ) : (
-          <ReactQuill modules={modules} formats={formats} theme="snow" value={value} onChange={setValue} />
+          <ReactQuill modules={modules} formats={formats} theme="snow" value={content}  onChange={setContent} />
         )}
       </AdminLayout>
     );

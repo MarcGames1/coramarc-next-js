@@ -4,20 +4,19 @@ import { OffCanvasSearchContext } from "../../../context/offCanvasSearchContext/
 import { ScrollPosition } from "../../../context/ScrollPositionContext/ScrollPositionContext"
 
 const  HeaderMiddleArea = () =>{
-
     const [sticky, setSticky] = useState('sticky')
     const [scroolPosition] = useContext(ScrollPosition)
     const [show, hideSearch, showSearch] = useContext(OffCanvasSearchContext)
-
+    
     const addSticky = () =>{
         setSticky('sticky is-sticky')
     }
-
-
+    
+    
     const removeSticky = () =>{
         setSticky('sticky')
     }
-  
+    
     useEffect(() => {
         if (scroolPosition < 100) {
             removeSticky()
@@ -25,9 +24,10 @@ const  HeaderMiddleArea = () =>{
         else {
             addSticky()
         }
-
+        
     }, [scroolPosition])
-
+    
+    const img = '/assets/img/logo/logo.png'
     return(<>
         {/* <!-- header middle area start --> */}
         <div className={`header-main-area black-soft sticky  ${sticky}`}>
@@ -37,7 +37,7 @@ const  HeaderMiddleArea = () =>{
                     <div className="col-auto">
                         <div className="logo">
                             <Link href="/">
-                                <a href="/"><img src="/assets/img/logo/logo.png" alt="Coramarc Logo" /></a>
+                                <a href="/"><img src={img}alt="Coramarc Logo" /></a>
                             </Link>
                         </div>
                     </div>

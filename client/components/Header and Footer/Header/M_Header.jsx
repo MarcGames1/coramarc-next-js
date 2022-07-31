@@ -11,17 +11,17 @@ const M_Header = () =>{
     return (
       <>
         {/* <!-- Start Header Area --> */}
-        <header class="header-area">
+        <header className="header-area">
           {/* <!-- main header start --> */}
-          <div class="main-header d-none d-lg-block">
+          <div className="main-header d-none d-lg-block">
             {/* <!-- header top start --> */}
-            <div class="header-top black-bg">
-              <div class="container">
-                <div class="row align-items-center">
-                  <div class="col-lg-6">
+            <div className="header-top black-bg">
+              <div className="container">
+                <div className="row align-items-center">
+                  <div className="col-lg-6">
                     
                   </div>
-                  <div class="col-lg-6 d-flex justify-content-end">
+                  <div className="col-lg-6 d-flex justify-content-end">
                     <UserSocialLinks />
                  
                     <UserInfo />
