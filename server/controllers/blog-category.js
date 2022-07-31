@@ -15,15 +15,19 @@ exports.categoryById = (req, res, next, id) => {
 };
 
 exports.create = async (req, res) => {
-    const {name} = req.body
+  const {name, content} = req.body
   const category = await new Category({
     name,
-    slug: slugify(name)
+    content,
+    slug: slugify(name),
+
   });
   category.save((err, data) => {
     if (err) {
+      console.log(err);
       return res.status(400).json({
         error: 'Something went wrong',
+        
       });
     }
 

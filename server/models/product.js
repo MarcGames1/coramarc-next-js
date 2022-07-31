@@ -1,56 +1,56 @@
 const mongoose = require('mongoose');
 const { ObjectId } = mongoose.Schema
-const productSchema = new mongoose.Schema({
+const productSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        trim: true,
-        required: true,
-        maxlength: 32,
-        
+      type: String,
+      trim: true,
+      required: true,
+      maxlength: 32,
     },
     description: {
-        type: String,
-        required: true,
-        maxlength: 2000
+      type: String,
+      required: true,
+      maxlength: 2000,
     },
     price: {
-        type: Number,
-        trim: true,
-        required: true,
-        maxlength: 32
+      type: Number,
+      trim: true,
+      required: true,
+      maxlength: 32,
     },
 
     category: {
-        type: ObjectId,
-        ref: "Category",
-        required: true,
+      type: ObjectId,
+      ref: 'Category',
+      required: true,
     },
     quantity: {
-        type: String,
-        trim: true,
-        required: true,
-        maxlength: 32
+      type: String,
+      trim: true,
+      required: true,
+      maxlength: 32,
     },
 
     sold: {
-        type: Number,
-        default: 0,
+      type: Number,
+      default: 0,
     },
 
-    photo:{
-        data:Buffer,
-        contentType: String,
+    photo: [{
+      data: Buffer,
+      contentType: String,
+    }],
+    content: {},
+    
+    shipping: {
+      required: false,
+      type: Boolean,
     },
-    shipping:{
-        required: false,
-        type:Boolean,
-    }
-
-
-
-
-
-}, { timestamps: true });
+    
+  },
+  { timestamps: true }
+);
 
 
 

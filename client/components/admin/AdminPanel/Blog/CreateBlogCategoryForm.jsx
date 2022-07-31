@@ -3,36 +3,39 @@ const FontAwesomeIcon = dynamic(
   async () => (await import('@fortawesome/react-fontawesome')).FontAwesomeIcon
 );
 import { faCirclePlus } from '@fortawesome/free-solid-svg-icons';
-import { useState, useContext, useRef } from 'react';
+import { useState, useContext,useRef } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { AuthContext } from '../../../../context/auth';
 import { Form, InputGroup } from 'react-bootstrap';
 import LoadingBtn from "../../../UI/LoadingBtn";
-import { CategoryContext } from './categoryContext/categoryContext';
+import { BlogCategoryContext } from './BlogCategoryContext/BlogCategoryContext';
 
-const CreateCategoryForm = () => {
+const CreateBlogCategoryForm = () => {
 
   const [auth, setAuth] = useContext(AuthContext);
-  const [categories, setCategories, getCategories] = useContext(CategoryContext);
+  const [categories, setCategories, getCategories] = useContext(BlogCategoryContext);
 
   //state
   const [loading, setLoading] = useState(false);
   const [inputCategory, setInputCategory] = useState('');
 
-const catName = useRef()
 
+  const catName = useRef()
 
     // FUNCTIONS
   const handleChange = {
     name: (e) => {
       console.log(inputCategory);
       setInputCategory(e.target.value);
+      
     },
     submit_form: (e) => {
       e.preventDefault();
       onFinish(inputCategory);
-       catName.current.value = '';
+      catName.current.value = ""
+      
+      
     },
   };
 
@@ -42,7 +45,7 @@ const catName = useRef()
       setLoading(true);
       console.log('USER => ', auth.user._id);
 
-      const { data } = await axios.post(`/category/create/${auth.user._id}`, {
+      const { data } = await axios.post(`/blog-category/create/${auth.user._id}`, {
         name: values,
       });
       console.log('DATA => ', await data);
@@ -68,7 +71,7 @@ const catName = useRef()
   return (
     <Form onSubmit={handleChange.submit_form}>
       <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
+        <Form.Label>Creaza o Categorie Noua In Blog</Form.Label>
         <InputGroup className="single-input-item">
           <Form.Control
             ref={catName}
@@ -90,4 +93,4 @@ const catName = useRef()
   );
 };
 
-export default CreateCategoryForm;
+export default CreateBlogCategoryForm;

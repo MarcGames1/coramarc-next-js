@@ -7,7 +7,10 @@ const blogCategorySchema = new mongoose.Schema(
       required: true,
       maxlength: 32,
     },
-
+    title:{
+      type: String,
+    },
+  content:{},
     slug: {
       type: String,
       unique: true,

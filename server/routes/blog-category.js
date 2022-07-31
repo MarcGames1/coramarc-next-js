@@ -30,6 +30,24 @@ router.delete(
   remove
 );
 router.get('/blog-categories', list);
+router.get('/blog-category/:categoryId', categoryById, read);
+router.post('/blog-category/create/:userId', requireSignin, isAuth, isAdmin, create);
+router.put(
+  '/blog-category/:categoryId/:userId',
+  requireSignin,
+  isAuth,
+  isAdmin,
+  update
+);
+router.delete(
+  '/blog-category/:categoryId/:userId',
+  requireSignin,
+  isAuth,
+  isAdmin,
+  remove
+);
+
+
 
 router.param('categoryId', categoryById);
 router.param('userId', userById);

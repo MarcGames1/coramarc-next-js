@@ -11,17 +11,16 @@ import {
   Form,
   Alert} from 'react-bootstrap';
 import axios from 'axios';
-import { useState, useContext } from 'react';
+import { useState, useContext, useRef } from 'react';
 import { AuthContext } from '../../../../context/auth';
-import { CategoryContext } from './categoryContext/categoryContext';
-import toast from 'react-hot-toast';
+import {BlogCategoryContext } from './BlogCategoryContext/BlogCategoryContext';
 
 
-const CategoryListElement = (props) => {
+const BlogCategoryListElement = (props) => {
 
-  const [categories, setCategories, getCategories] = useContext(CategoryContext);
+  const [categories, setCategories, getCategories] = useContext(BlogCategoryContext);
   const [auth, setAuth] = useContext(AuthContext);
-
+  const name = useRef()
 //STATE
 const [show, setShow] = useState(false)
 const [inputData, setInputData] = useState()
@@ -30,22 +29,20 @@ const [inputData, setInputData] = useState()
 
   const handler = {
     delete: async (categoryId) => {
-      let url = `/category/${categoryId}/${auth.user._id}`;
+      let url = `/blog-category/${categoryId}/${auth.user._id}`;
 
       // error handling + mesaj feedback cu TOAST
       await axios.delete(url);
-      toast.success("Categorie Stearsa")
-      getCategories()
-      setShow(false);
+      getCategories();
     },
     update: async (categoryId, data) => {
     
-      let url = `/category/${categoryId}/${auth.user._id}`;
+      let url = `/blog-category/${categoryId}/${auth.user._id}`;
       console.log('URL +> ', url);
       console.log(data)
       await axios.put(url, { name: data });
       setShow(false)
-      getCategories();
+      getCategories()
     },
 
     change:(e)=>{
@@ -75,6 +72,7 @@ const [inputData, setInputData] = useState()
             <Button
               onClick={()=>{
                 setShow(!show)
+               
               }}
               variant="warning"
               type="submit"
@@ -88,7 +86,9 @@ const [inputData, setInputData] = useState()
               placeholder={props.name}
               aria-label={props.name}
               aria-describedby={`Modifica Categoria ${props.name}`}
-              defaultValue={props.name}
+              Defaultvalue={props.name}
+              
+              
             />
             <Button type='submit' onClick={()=>{
                 handler.update(props._id, inputData)
@@ -102,4 +102,4 @@ const [inputData, setInputData] = useState()
   );
 };
 
-export default CategoryListElement;
+export default BlogCategoryListElement;

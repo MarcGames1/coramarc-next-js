@@ -4,9 +4,9 @@ import toast from 'react-hot-toast';
 
 
 
-const CategoryContext = createContext();
+const BlogCategoryContext = createContext();
 
-const CategoryProvider = ({ children }) => {
+const BlogCategoryProvider = ({ children }) => {
 
 
 
@@ -17,7 +17,7 @@ const CategoryProvider = ({ children }) => {
 
 
  const getCategories = async ()=>{
-            const {data} = await axios.get('/categories')
+            const {data} = await axios.get('/blog-categories')
             if(data?.error){
                 toast.error(data.error)
             }
@@ -29,10 +29,10 @@ const CategoryProvider = ({ children }) => {
   }, []);
 
   return (
-    <CategoryContext.Provider value={[categories, setCategories, getCategories]}>
+    <BlogCategoryContext.Provider value={[categories, setCategories, getCategories]}>
       {children}
-    </CategoryContext.Provider>
+    </BlogCategoryContext.Provider>
   );
 };
 
-export { CategoryContext, CategoryProvider };
+export { BlogCategoryContext, BlogCategoryProvider };
