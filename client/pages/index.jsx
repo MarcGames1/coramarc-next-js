@@ -10,7 +10,7 @@ import {  AuthContext  } from "../context/auth"
 import { HeroCarousel, SliderArea } from "../Components/HomepageSections";
 import {} from 'react'
 
-import MainLayout from "../Layout/MainLayout";
+import HomePageLayout from '../Layout/HomepageLayout';
 
 export default function Home() {
 const [auth, setAuth] = useContext(AuthContext)
@@ -25,9 +25,9 @@ const [auth, setAuth] = useContext(AuthContext)
     return (
       <>
         <pre>{JSON.stringify(auth, null, 4)}</pre>
-        <MainLayout>
+        <HomePageLayout>
           <HeroCarousel />
-        </MainLayout>
+        </HomePageLayout>
       </>
     );
 
