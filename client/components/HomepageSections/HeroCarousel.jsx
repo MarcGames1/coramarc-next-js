@@ -49,7 +49,7 @@ function HeroCarousel() {
             {carouselItemData.map((item)=>{
                 
                 return(
-                    <Carousel.Item className={styles.carouselItem} >
+                    <Carousel.Item key={item.id} className={styles.carouselItem} >
                         
                             <img
                                 className={`d-block w-100 ${styles.img}`}

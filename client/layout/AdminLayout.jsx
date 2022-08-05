@@ -86,7 +86,7 @@ return (
           <SidebarMenu toggleMenu={toggleMenu} />
           )}
 
-        <Col fluid lg={hidden ? 12 : 10} sm md={hidden ? 12 : 10}>
+        <Col lg={hidden ? 12 : 10} sm md={hidden ? 12 : 10}>
           <h1> </h1>
           <main>{children}</main>
         </Col>

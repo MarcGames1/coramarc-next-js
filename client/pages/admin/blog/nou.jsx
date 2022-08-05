@@ -2,18 +2,26 @@ import AdminLayout from '../../../layout/AdminLayout'
 import dynamic from 'next/dynamic';
 import React, { useState, useEffect, useRef } from 'react';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
-const ReactQuill = dynamic(import('react-quill'), {	
+const ReactQuill  = dynamic(import('react-quill'), {	
 	ssr: false,
 	loading: () => <p>Loading ...</p>,
 	})
+
+const Quill = dynamic(import('quill'), {
+  ssr: false,
+  loading: () => <p>Loading ...</p>,
+});
+
+
 
   import axios from 'axios';
 import Select from 'react-select';
 
 
-
+console.log("QUILL =>", Quill)
 
 function NewPost () {
+
 
   // <==============/ Check Local Storage /=======================>
   const storedBlogContent = () => {
@@ -104,7 +112,11 @@ function NewPost () {
     toolbar: toolbarOptions,
     clipboard: {
       // toggle to add extra line breaks when pasting HTML:
-      matchVisual: true,
+      matchVisual: false,
+      table: true,
+      imageResize: {
+        displaySize: true,
+      },
     },
   };
   // <==============/ ReactQuill Configuration /=======================>
@@ -128,6 +140,7 @@ function NewPost () {
   //<==============/ Loading Categories from Backend /=======================>
   useEffect(() => {
     loadCategories()
+    
   },[])
 
   const loadCategories = async () =>{
@@ -146,6 +159,10 @@ function NewPost () {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setLoading(false);
+    if(typeof Quill?.register === 'function') {
+       Quill.register('modules/imageResize', ImageResize);
+    } 
+      
     }
   }, [content]);
   //<==============/ Loading Before Editor shows up /=======================>
