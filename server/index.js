@@ -17,6 +17,7 @@ import userRoutes from "./routes/user"
 import categoryRoutes from "./routes/category"
 import productRoutes from "./routes/product"
 import blogRoutes from "./routes/blog-category";
+import postRoutes from './routes/posts'
 const app = express();
 
 // db connection
@@ -40,7 +41,7 @@ app.use('/api/', userRoutes)
 app.use('/api/', categoryRoutes)
 app.use('/api/', productRoutes)
 app.use('/api/', blogRoutes);
-
+app.use('/api/', postRoutes)
 
 const port = process.env.port || 8000
 app.listen(port,
