@@ -9,7 +9,10 @@ const postSchema = new Schema({
   },
   content: {},
   categories: [{ type: ObjectId, ref: 'Blog Category' }],
-  mainImg:{},
+  Image:{ 
+    data: Buffer,
+    contentType: String,
+    },
   published: {type: Boolean, default: true},
   postedBy: {type: ObjectId, ref: 'User'},
   slug:{

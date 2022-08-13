@@ -17,6 +17,7 @@ const Quill = dynamic(import('quill'), {
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import Select from 'react-select';
+import { config } from 'process';
 
 
 
@@ -144,14 +145,18 @@ function NewPost () {
         title: blogTitle,
         content: content,
         categories: categories,
-        mainImg: 'img binary',
+        Image: image,
       };
       console.log("POST DATA ====>> ",postData)
       const { data } = await axios.post(
         `/post/create/${auth.user._id}`,
-        postData
-      );
-      console.log('DATA => ', await data);
+        postData,{
+  headers: {
+    "Content-Type": "multipart/form-data",
+  },
+         
+});
+      console.log('DATA => ', data);
       if (data?.error) {
         toast.dismiss();
         toast.error('Error Saving Post');
@@ -165,6 +170,14 @@ function NewPost () {
    const  catList = selectedOptions.map((option)=>{return option.value})
       setCategories(catList);
       console.log("CATEGORIES ===> ",categories)
+    },
+
+    uploadPic: (e) =>{
+      e.preventDefault();
+      const file = e.target.files[0];
+      setImage(file)
+      console.log("uploadPic ===> ",file)
+
     }
   };
 
@@ -186,6 +199,7 @@ function NewPost () {
     catch(err){
       console.log(err);
     }
+
   }
   //<==============/ Loading Categories from Backend /=======================>
   //<==============/ Loading Before Editor shows up /=======================>
@@ -248,15 +262,20 @@ function NewPost () {
             className="basic-multi-select"
             classNamePrefix="select"
           />
-
-          <Form.Group controlId="formFileLg" className="mb-3">
-            <Form.Label>Poza Reprezentativa</Form.Label>
-            <Form.Control type="file" size="lg" onChange= {e =>{
-              setImage(e.target.value)
-              console.log(image)
-            }
-              }/>
-          </Form.Group>
+          <Form method="post" onSubmit={e =>{
+            handler.uploadPic(e)
+          }} enctype="multipart/form-data">
+            <Form.Group controlId="formFileLg" className="mb-3">
+              <Form.Label>Poza Reprezentativa</Form.Label>
+              <Form.Control
+                type="file"
+                size="lg"
+                accept="image/*"
+                multiple={false}
+                
+              />
+            </Form.Group>
+          </Form>
           <div className="d-flex justify-content-around">
             <Button
               variant="primary"
