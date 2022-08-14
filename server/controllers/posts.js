@@ -8,7 +8,7 @@ import slugify from 'slugify';
 
 export const create = (req, res) => {
 
-  console.log(req.body)
+  console.log("REQ BODY =>",req.body)
 
   const {title, content, categories} = req.body
   console.log("title ",req.body.title)

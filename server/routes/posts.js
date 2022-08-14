@@ -20,7 +20,8 @@ router.post(
   requireSignin,
   isAuth,
   isAdmin,
-   create
+  uploadPostImage,
+  create,
 );
 
 router.post('/post/create/upload', uploadPostImage);

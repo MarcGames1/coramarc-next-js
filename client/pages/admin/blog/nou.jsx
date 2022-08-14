@@ -16,40 +16,38 @@ import ConfiguredQuill from '../../../quill/ConfiguredQuill';
 
 
 function NewPost () {
-
+const ResetBlogData = {
+  title: '',
+  content: '',
+  image:{},
+  categories: [],
+};
 
   // <==============/ Check Local Storage /=======================>
-  const storedBlogContent = () => {
-    if (process.browser) {
-      if (localStorage.getItem('blogContent')) {
-        return JSON.parse(localStorage.getItem('blogContent'));
-      }
+const localStorageBlogData = () =>{
+  if(process.browser){
+    if(localStorage.getItem('blogData')){
+      return JSON.parse(localStorage.getItem('blogData'));
+    } else{
+      return ResetBlogData
     }
-  };
+  }
+}
 
-  const storedBlogTitle = () => {
-    if (process.browser) {
-      if (localStorage.getItem('blogTitle')) {
-        return JSON.parse(localStorage.getItem('blogTitle'));
-      }
-    }
-  };
+ const saveData = (blogData) => {
+   localStorage.setItem('blog', JSON.stringify(blogData));
+ };
+
+
   // <==============/ Check Local Storage /=======================>
   // <==============/ STATE /=======================>
   const [loading, setLoading] = useState(true);
-  const [content, setContent] = useState(storedBlogContent());
-  const [blogTitle, setBlogTitle] = useState(storedBlogTitle());
-  const [categories, setCategories] = useState();
+  const [blogData, setBlogData] = useState(localStorageBlogData());
   const [loadedCategories, setLoadedCategories] = useState([]);
-  const [auth, setAuth] = useContext(AuthContext);
-  const [image, setImage] = useState()
-  
-
-  const saveData = () => {
-    const data = { title: blogTitle, content };
-    localStorage.setItem('blog', JSON.stringify(data));
-    return data;
-  };
+  const [auth] = useContext(AuthContext);
+  const [image, setImage] = useState(null)
+  var bodyFormData = undefined;
+ 
   // <==============/ STATE /=======================>
 
   const categoriesOptions = loadedCategories.map(category =>{
@@ -62,34 +60,45 @@ function NewPost () {
 
   const handler = {
     titleChange: (e) => {
-      setBlogTitle(e.target.value);
-      localStorage.setItem('blogTitle', JSON.stringify(blogTitle));
-      console.log(blogTitle);
+      e.preventDefault();
+      setBlogData( {...blogData, title: e.target.value});
+      saveData();
+      console.log(blogData);
     },
     contentChange: (v) => {
-      setContent(v);
-      localStorage.setItem('blogContent', JSON.stringify(content));
-      console.log(v);
+      setBlogData({...blogData, content: v  });
+      saveData();
+      console.log(blogData);
     },
-    savePost: async () => {
-      console.log('post Saved');
+    imageChange:(e) =>{
+      console.log(e.target.files[0])
+      bodyFormData = new FormData();
+      bodyFormData.append('postImage', e.target.files[0]);
+    },
+    categoriesChange: (selectedOptions) => {
+      const catList = selectedOptions.map((option) => {
+        return option.value;
+      });
+      setBlogData({...blogData, categories: catList });
+      saveData();
+      console.log(blogData);
+    },
+
+    savePost:  () => {
+
+      bodyFormData.append("title", blogData.title)
+      bodyFormData.append("content", blogData.content)
+      bodyFormData.append("categories", blogData.categories)
+      
+      // bodyFormData.append({blogData });
       const postLoading = toast.loading('Saving post...');
-      const postData = {
-        title: blogTitle,
-        content: content,
-        categories: categories,
-        Image: image,
-      };
-      console.log("POST DATA ====>> ",postData)
-      const { data } = await axios.post(
+
+      const { data } =  axios.post(
         `/post/create/${auth.user._id}`,
-        postData,{
-  headers: {
-    "Content-Type": "multipart/form-data",
-  },
-         
-});
-      console.log('DATA => ', data);
+        bodyFormData,
+        { headers: { 'Content-Type': 'multipart/form-data' } }
+      );
+
       if (data?.error) {
         toast.dismiss();
         toast.error('Error Saving Post');
@@ -97,15 +106,17 @@ function NewPost () {
       } else {
         toast.dismiss();
         toast.success('Post Saved');
+        console.log(data)
       }
-    },
-    categoriesChange: selectedOptions =>{
-   const  catList = selectedOptions.map((option)=>{return option.value})
-      setCategories(catList);
-      console.log("CATEGORIES ===> ",categories)
+      bodyFormData = null
+      bodyFormData = new FormData();
+      setBlogData(ResetBlogData);
     },
 
-   
+    submit:(e) =>{
+      e.preventDefault();
+     console.log(e?.file)
+    }
   };
 
 
@@ -137,7 +148,7 @@ function NewPost () {
   
       
     }
-  }, [content]);
+  }, [blogData?.content]);
   //<==============/ Loading Before Editor shows up /=======================>
 
   return (
@@ -156,20 +167,22 @@ function NewPost () {
                 </Form.Label>
                 <Form.Control
                   name="Titlu"
-                  defaultValue={blogTitle}
-                  onChange={handler.titleChange}
+                  value={blogData.title}
+                  onChange={(e) => {
+                    handler.titleChange(e);
+                  }}
                   type="text"
                   placeholder="Titlu Articol"
                 />
               </Form>
               <ConfiguredQuill
-                value={content}
+                value={blogData.content}
                 onChange={handler.contentChange}
               />
 
               <div
                 className="ql-content"
-                dangerouslySetInnerHTML={{ __html: content }}
+                dangerouslySetInnerHTML={{ __html: blogData.content }}
               ></div>
             </>
           )}
@@ -185,13 +198,14 @@ function NewPost () {
             classNamePrefix="select"
           />
           <Form
-            action={`${process.env.NEXT_PUBLIC_API}/post/create/${auth.user._id}`}
+            // action={`${process.env.NEXT_PUBLIC_API}/post/create/${auth?.user?._id}`}
             method="post"
             enctype="multipart/form-data"
           >
             <Form.Group controlId="formFileLg" className="mb-3">
               <Form.Label>Poza Reprezentativa</Form.Label>
               <Form.Control
+              onChange={e=>{handler.imageChange(e)}}
                 enctype="multipart/form-data"
                 type="file"
                 name="postImage"
@@ -200,25 +214,31 @@ function NewPost () {
                 multiple={false}
               />
             </Form.Group>
-            
-          <div className="d-flex justify-content-around">
-            <Button
-              variant="primary"
-              className="btn btn-bg"
-              onClick={e=>{e.preventDefault();handler.savePost();}}
-              type="submit"
+
+            <div className="d-flex justify-content-around">
+              <Button
+                variant="primary"
+                className="btn btn-bg"
+                onSubmit={(e) => {
+                  handler.submit(e);
+                }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  handler.savePost();
+                }}
+                type="submit"
               >
-              Save Blog Post
-            </Button>
-            <Button
-              variant="secondary"
-              className="btn btn-bg2"
-              onClick={handler.preview}
+                Save Blog Post
+              </Button>
+              <Button
+                variant="secondary"
+                className="btn btn-bg2"
+                onClick={handler.preview}
               >
-              Previzualizeaza
-            </Button>
-          </div>
-              </Form>
+                Previzualizeaza
+              </Button>
+            </div>
+          </Form>
         </Col>
       </Row>
     </AdminLayout>

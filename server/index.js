@@ -4,7 +4,7 @@ import cors from "cors";
 import mongoose from "mongoose";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
-
+import path from "path";
 require("dotenv").config();
 // import morgan from "morgan";
 
@@ -19,7 +19,7 @@ import productRoutes from "./routes/product"
 import blogRoutes from "./routes/blog-category";
 import postRoutes from './routes/posts'
 const app = express();
-
+import {uploadPostImage} from './middleweare/fileUpload'
 // db connection
 mongoose
   .connect(process.env.DATABASE)
@@ -33,7 +33,10 @@ app.use(express.json({ limit: "4mb" }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(express.static('./public'))
+
+const dir = path.join(__dirname, 'public')
+console.log(dir)
+app.use(express.static(dir))
 
 // route middlewares
 app.use("/api", authRoutes);
@@ -43,19 +46,11 @@ app.use('/api/', productRoutes)
 app.use('/api/', blogRoutes);
 app.use('/api/', postRoutes)
 
-app.post('/api/uploadPostImage', (req, res)=>{
-  upload(req, res, (err) =>{
-    if(err){
-      res.json(err)
-    } else{
-      console.log(req.file)
-      res.send("test")
-    }
-  }, )
+app.post('/api/uploadPostImage', uploadPostImage )
    
 
   
-});
+
 
 const port = process.env.port || 8000
 app.listen(port,
