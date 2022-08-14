@@ -1,21 +1,25 @@
-import formidable from 'formidable';
-import _ from 'lodash';
-import fs from 'fs'
+
 import Post from '../models/post';
 import slugify from 'slugify';
 
 
-export const create = async (req, res) => {
- console.log("Create Post")
-console.log(req.body)
-  const {title, content, categories, Image} = req.body
-  console.log(Image)
+
+
+
+export const create = (req, res) => {
+
+  console.log(req.body)
+
+  const {title, content, categories} = req.body
+  console.log("title ",req.body.title)
+ let post_slug = slugify(req.body.title)
  let post = new Post({
    title,
    content,
    categories,
-   slug: slugify(String(title)),
+   slug: post_slug,
  });
+ console.log(post)
 
 //  post.Image = fs.readFileSync(files.photo.path);
 //  post.Image.contentType = files.photo.type;

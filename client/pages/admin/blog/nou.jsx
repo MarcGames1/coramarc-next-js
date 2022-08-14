@@ -3,25 +3,17 @@ import dynamic from 'next/dynamic';
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { AuthContext } from '../../../context/auth';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
-const ReactQuill  = dynamic(import('react-quill'), {	
-	ssr: false,
-	loading: () => <p>Loading ...</p>,
-	})
 
-const Quill = dynamic(import('quill'), {
-  ssr: false,
-  loading: () => <p>Loading ...</p>,
-});
 
 
 import toast from 'react-hot-toast';
 import axios from 'axios';
 import Select from 'react-select';
 import { config } from 'process';
+import ConfiguredQuill from '../../../quill/ConfiguredQuill';
 
 
 
-console.log("QUILL =>", Quill)
 
 function NewPost () {
 
@@ -51,7 +43,7 @@ function NewPost () {
   const [loadedCategories, setLoadedCategories] = useState([]);
   const [auth, setAuth] = useContext(AuthContext);
   const [image, setImage] = useState()
-  const inputTitle = useRef(0);
+  
 
   const saveData = () => {
     const data = { title: blogTitle, content };
@@ -64,66 +56,7 @@ function NewPost () {
     return {value: category._id, label:category.name}
     
   })
-  //  [
-  //   { value: 'chocolate', label: 'Chocolate' },
-  //   { value: 'strawberry', label: 'Strawberry' },
-  //   { value: 'vanilla', label: 'Vanilla' },
-  // ];
-  // <==============/ ReactQuill Configuration /=======================>
-  const formats = [
-    'header',
-    'font',
-    'size',
-    'table',
-    'bold',
-    'italic',
-    'underline',
-    'background',
-    'color',
-    'strike',
-    'blockquote',
-    'list',
-    'bullet',
-    'indent',
-    'link',
-    'image',
-    'video',
-    'align',
-    'code-block',
-  ];
 
-  const toolbarOptions = [
-    ['bold', 'italic', 'underline', 'strike'], // toggled buttons
-    ['blockquote', 'code-block'],
-
-    [], // custom button values
-    [{ list: 'ordered' }, { list: 'bullet' }],
-    [{ script: 'sub' }, { script: 'super' }], // superscript/subscript
-    [{ indent: '-1' }, { indent: '+1' }], // outdent/indent
-    [{ direction: 'rtl' }], // text direction
-
-    [{ size: ['small', false, 'large', 'huge'] }], // custom dropdown
-    [{ header: [1, 2, 3, 4, 5, 6, false] }],
-
-    [{ color: [] }, { background: [] }], // dropdown with defaults from theme
-    [{ font: [] }],
-    [{ align: [] }],
-
-    ['clean'],
-  ];
-
-  const modules = {
-    toolbar: toolbarOptions,
-    clipboard: {
-      // toggle to add extra line breaks when pasting HTML:
-      matchVisual: false,
-      table: true,
-      imageResize: {
-        displaySize: true,
-      },
-    },
-  };
-  // <==============/ ReactQuill Configuration /=======================>
 
   //<==============/ Handler Object /=======================>
 
@@ -172,13 +105,7 @@ function NewPost () {
       console.log("CATEGORIES ===> ",categories)
     },
 
-    uploadPic: (e) =>{
-      e.preventDefault();
-      const file = e.target.files[0];
-      setImage(file)
-      console.log("uploadPic ===> ",file)
-
-    }
+   
   };
 
 
@@ -207,9 +134,7 @@ function NewPost () {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setLoading(false);
-    if(typeof Quill?.register === 'function') {
-       Quill.register('modules/imageResize', ImageResize);
-    } 
+  
       
     }
   }, [content]);
@@ -237,10 +162,7 @@ function NewPost () {
                   placeholder="Titlu Articol"
                 />
               </Form>
-              <ReactQuill
-                modules={modules}
-                formats={formats}
-                theme="snow"
+              <ConfiguredQuill
                 value={content}
                 onChange={handler.contentChange}
               />
@@ -262,36 +184,41 @@ function NewPost () {
             className="basic-multi-select"
             classNamePrefix="select"
           />
-          <Form method="post" onSubmit={e =>{
-            handler.uploadPic(e)
-          }} enctype="multipart/form-data">
+          <Form
+            action={`${process.env.NEXT_PUBLIC_API}/post/create/${auth.user._id}`}
+            method="post"
+            enctype="multipart/form-data"
+          >
             <Form.Group controlId="formFileLg" className="mb-3">
               <Form.Label>Poza Reprezentativa</Form.Label>
               <Form.Control
+                enctype="multipart/form-data"
                 type="file"
+                name="postImage"
                 size="lg"
                 accept="image/*"
                 multiple={false}
-                
               />
             </Form.Group>
-          </Form>
+            
           <div className="d-flex justify-content-around">
             <Button
               variant="primary"
               className="btn btn-bg"
-              onClick={handler.savePost}
-            >
+              onClick={e=>{e.preventDefault();handler.savePost();}}
+              type="submit"
+              >
               Save Blog Post
             </Button>
             <Button
               variant="secondary"
               className="btn btn-bg2"
               onClick={handler.preview}
-            >
+              >
               Previzualizeaza
             </Button>
           </div>
+              </Form>
         </Col>
       </Row>
     </AdminLayout>

@@ -2,6 +2,10 @@ import mongoose from 'mongoose';
 const {Schema} = mongoose;
 const {ObjectId} = mongoose.Schema
 
+
+
+
+
 const postSchema = new Schema({
   title: {
     type: String,
@@ -10,8 +14,7 @@ const postSchema = new Schema({
   content: {},
   categories: [{ type: ObjectId, ref: 'Blog Category' }],
   Image:{ 
-    data: Buffer,
-    contentType: String,
+    type: String,
     },
   published: {type: Boolean, default: true},
   postedBy: {type: ObjectId, ref: 'User'},
