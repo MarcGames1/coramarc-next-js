@@ -10,22 +10,33 @@ export const create = (req, res) => {
 
   console.log("REQ BODY =>",req.body)
 
-  const {title, content, categories} = req.body
+  const {title, content, categories, Image} = req.body
   console.log("title ",req.body.title)
  let post_slug = slugify(req.body.title)
  let post = new Post({
    title,
    content,
    categories,
+   Image,
    slug: post_slug,
  });
- console.log(post)
+ post.save((err, data)=>{
+  if(err){
+     console.log(err);
+     return res.status(500).json({error: err});
+   }if(data){
+    res.status(200).json({success: true})
+   }
+   
+
+  })
+ }
+ 
 
 //  post.Image = fs.readFileSync(files.photo.path);
 //  post.Image.contentType = files.photo.type;
 
-res.json(post)
-};
+
 
 export const update = () => {
   console.log('post Updated');

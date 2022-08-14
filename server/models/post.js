@@ -14,7 +14,7 @@ const postSchema = new Schema({
   content: {},
   categories: [{ type: ObjectId, ref: 'Blog Category' }],
   Image:{ 
-    type: String,
+    type: Object,
     },
   published: {type: Boolean, default: true},
   postedBy: {type: ObjectId, ref: 'User'},
