@@ -7,7 +7,7 @@ import {  AuthContext  } from "../context/auth"
 // import Slider from "../components/HomePage/Slider/Slider"
 
 
-import { HeroCarousel, SliderArea } from "../Components/HomepageSections";
+import { HeroCarousel,  } from "../Components/HomepageSections";
 import {} from 'react'
 
 import HomePageLayout from '../Layout/HomepageLayout';
@@ -24,7 +24,7 @@ const [auth, setAuth] = useContext(AuthContext)
 
     return (
       <>
-        <pre>{JSON.stringify(auth, null, 4)}</pre>
+        {/* <pre>{JSON.stringify(auth, null, 4)}</pre> */}
         <HomePageLayout>
           <HeroCarousel />
         </HomePageLayout>

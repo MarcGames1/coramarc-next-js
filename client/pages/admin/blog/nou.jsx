@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { AuthContext } from '../../../context/auth';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
-
+import Router from 'next/router';
 
 
 import toast from 'react-hot-toast';
@@ -24,28 +24,38 @@ const ResetBlogData = {
 };
 
   // <==============/ Check Local Storage /=======================>
-const localStorageBlogData = () =>{
-  if(process.browser){
-    if(localStorage.getItem('blogData')){
-      return JSON.parse(localStorage.getItem('blogData'));
+const LocalStorageBlogData = () =>{
+  if(typeof(window)!=='undefined'){
+    if(!localStorage.getItem('blogData')){
+      console.log(
+        'LOCAL STORAGE BLOG DATA ===>>> ',
+        JSON.parse(localStorage.getItem('blogData'))
+      );
+      return ResetBlogData;
     } else{
-      return ResetBlogData
+      
+       console.log(
+         'LOCAL STORAGE BLOG DATA ===>>> ',
+         JSON.parse(localStorage.getItem('blogData'))
+       );
+       return JSON.parse(localStorage.getItem('blogData'));
     }
   }
 }
 
  const saveData = (blogData) => {
-   localStorage.setItem('blog', JSON.stringify(blogData));
+   localStorage.setItem('blogData', JSON.stringify(blogData));
  };
 
 
   // <==============/ Check Local Storage /=======================>
   // <==============/ STATE /=======================>
   const [loading, setLoading] = useState(true);
-  const [blogData, setBlogData] = useState(localStorageBlogData());
+  const [blogData, setBlogData] = useState(LocalStorageBlogData());
   const [loadedCategories, setLoadedCategories] = useState([]);
   const [auth] = useContext(AuthContext);
   const [image, setImage] = useState(null)
+  const formRef = useRef();
   var bodyFormData = undefined;
  
   // <==============/ STATE /=======================>
@@ -62,12 +72,12 @@ const localStorageBlogData = () =>{
     titleChange: (e) => {
       e.preventDefault();
       setBlogData( {...blogData, title: e.target.value});
-      saveData();
-      console.log(blogData);
+      saveData({blogData});
+      console.log("BLOG DATA STATE =>",blogData);
     },
     contentChange: (v) => {
       setBlogData({...blogData, content: v  });
-      saveData();
+      saveData(blogData);
       console.log(blogData);
     },
     imageChange:(e) =>{
@@ -80,12 +90,14 @@ const localStorageBlogData = () =>{
         return option.value;
       });
       setBlogData({...blogData, categories: catList });
-      saveData();
+      saveData(blogData);
       console.log(blogData);
     },
 
     savePost:  () => {
-
+if(typeof(bodyFormData)=== 'undefined'){
+  bodyFormData =new FormData();
+}
       bodyFormData.append("title", blogData.title)
       bodyFormData.append("content", blogData.content)
       bodyFormData.append("categories", blogData.categories)
@@ -107,10 +119,14 @@ const localStorageBlogData = () =>{
         toast.dismiss();
         toast.success('Post Saved');
         console.log(data)
+        
+        bodyFormData = new FormData();
+        
+        setBlogData({});
+        localStorage.removeItem('blogData');
+        formRef.current.reset();
+        Router.reload()
       }
-      bodyFormData = null
-      bodyFormData = new FormData();
-      setBlogData(ResetBlogData);
     },
 
     submit:(e) =>{
@@ -176,7 +192,7 @@ const localStorageBlogData = () =>{
                 />
               </Form>
               <ConfiguredQuill
-                value={blogData.content}
+                value={blogData.content ?? ''}
                 onChange={handler.contentChange}
               />
 
@@ -198,6 +214,7 @@ const localStorageBlogData = () =>{
             classNamePrefix="select"
           />
           <Form
+            ref={formRef}
             // action={`${process.env.NEXT_PUBLIC_API}/post/create/${auth?.user?._id}`}
             method="post"
             enctype="multipart/form-data"
@@ -205,7 +222,9 @@ const localStorageBlogData = () =>{
             <Form.Group controlId="formFileLg" className="mb-3">
               <Form.Label>Poza Reprezentativa</Form.Label>
               <Form.Control
-              onChange={e=>{handler.imageChange(e)}}
+                onChange={(e) => {
+                  handler.imageChange(e);
+                }}
                 enctype="multipart/form-data"
                 type="file"
                 name="postImage"
@@ -219,11 +238,7 @@ const localStorageBlogData = () =>{
               <Button
                 variant="primary"
                 className="btn btn-bg"
-                onSubmit={(e) => {
-                  handler.submit(e);
-                }}
                 onClick={(e) => {
-                  e.preventDefault();
                   handler.savePost();
                 }}
                 type="submit"

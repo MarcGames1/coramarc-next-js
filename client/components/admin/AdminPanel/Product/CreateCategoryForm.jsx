@@ -10,7 +10,7 @@ import { AuthContext } from '../../../../context/auth';
 import { Form, InputGroup } from 'react-bootstrap';
 import LoadingBtn from "../../../UI/LoadingBtn";
 import { CategoryContext } from './categoryContext/categoryContext';
-
+import ConfiguredQuill from '../../../../quill/ConfiguredQuill'
 const CreateCategoryForm = () => {
 
   const [auth, setAuth] = useContext(AuthContext);
@@ -18,7 +18,10 @@ const CreateCategoryForm = () => {
 
   //state
   const [loading, setLoading] = useState(false);
-  const [inputCategory, setInputCategory] = useState('');
+  const [inputCategory, setInputCategory] = useState({
+    name: '',
+    description: '',
+  });
 
 const catName = useRef()
 
@@ -27,7 +30,10 @@ const catName = useRef()
   const handleChange = {
     name: (e) => {
       console.log(inputCategory);
-      setInputCategory(e.target.value);
+      setInputCategory({...inputCategory, name: e.target.value });
+    },
+    description:(v)=>{
+      setInputCategory({...inputCategory, description: v });
     },
     submit_form: (e) => {
       e.preventDefault();
@@ -81,6 +87,26 @@ const catName = useRef()
           </InputGroup.Text>
         </InputGroup>
       </Form.Group>
+      <span className=" h2">Descriere Categorie</span>
+      <ConfiguredQuill
+        value={''}
+        //handleChange
+      />
+      <Form.Label className=" h2">Poza Reprezentativa</Form.Label>
+      <Form.Control
+      
+        enctype="multipart/form-data"
+        type="file"
+        name="productCatImage"
+        onChange={(e) => {
+          e.preventDefault();
+          handleChange.imageChange(e);
+          e.reset()
+        }}
+        accept="image/*"
+        multiple={false}
+      />
+
       <LoadingBtn
         loading={loading}
         variant={'primary'}

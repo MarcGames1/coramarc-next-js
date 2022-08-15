@@ -8,6 +8,9 @@ const categorySchema = new mongoose.Schema(
       maxlength: 32,
     },
     content: {},
+    Image: {
+      type: Object,
+    },
     slug: {
       type: String,
       unique: true,
