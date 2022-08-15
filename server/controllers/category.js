@@ -15,9 +15,11 @@ exports.categoryById = (req, res, next, id) => {
 
 
 exports.create = async (req, res) =>{
-   const { name } = req.body;
+   const { name, content, Image } = req.body;
     const category = await new Category({
       name,
+      content,
+      Image,
       slug: slugify(name),
     });
     category.save((err, data)=>{

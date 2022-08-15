@@ -8,7 +8,7 @@ import path from "path";
 require("dotenv").config();
 // import morgan from "morgan";
 
-import {upload} from './middleweare/fileUpload'
+
 
 
 //Import routes

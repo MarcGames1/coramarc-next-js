@@ -18,14 +18,15 @@ const CreateCategoryForm = () => {
 
   //state
   const [loading, setLoading] = useState(false);
-  const [inputCategory, setInputCategory] = useState({
-    name: '',
-    description: '',
-  });
+  const [inputCategory, setInputCategory] = useState({initialState});
 
-const catName = useRef()
+  const initialState = { name: '', description: '' };
 
-
+const catName = useRef();
+// const quillRef = useRef();
+const formRef = useRef();
+//BodyFrom Data to append formdata later
+var bodyFormData = undefined;
     // FUNCTIONS
   const handleChange = {
     name: (e) => {
@@ -35,23 +36,40 @@ const catName = useRef()
     description:(v)=>{
       setInputCategory({...inputCategory, description: v });
     },
+    imageChange:(e)=>{
+      if (typeof bodyFormData === 'undefined') {
+        bodyFormData = new FormData();
+      }
+       bodyFormData.append('postImage', e.target.files[0])
+    },
     submit_form: (e) => {
       e.preventDefault();
-      onFinish(inputCategory);
+      if (typeof bodyFormData === 'undefined') {
+        bodyFormData = new FormData();
+      }
+       bodyFormData.append('name', inputCategory.name);
+       bodyFormData.append('content', inputCategory.description);
+      onFinish();
        catName.current.value = '';
+      //  quillRef.current.value = '';
+       bodyFormData = undefined;
     },
   };
 
-  const onFinish = async (values) => {
-    console.log('VALUES', { name: values });
+  const onFinish = () => {
+    
     try {
       setLoading(true);
       console.log('USER => ', auth.user._id);
 
-      const { data } = await axios.post(`/category/create/${auth.user._id}`, {
-        name: values,
-      });
-      console.log('DATA => ', await data);
+      const { data } = axios.post(
+        `/category/create/${auth.user._id}`,
+        {
+          bodyFormData,
+        },
+        { headers: { 'Content-Type': 'multipart/form-data' } }
+      );
+      console.log('DATA => ',  data);
       if (data?.error) {
         setLoading(false);
         toast.error(data.error);
@@ -60,6 +78,7 @@ const catName = useRef()
         toast.success('Categorie Creata cu Succes');
         setLoading(false);
         console.log(data);
+        
         getCategories()
       }
     } catch (err) {
@@ -72,9 +91,13 @@ const catName = useRef()
 
     //FUNCTIONS END
   return (
-    <Form onSubmit={handleChange.submit_form}>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
+    <Form
+      ref={formRef}
+      enctype="multipart/form-data"
+      onSubmit={handleChange.submit_form}
+    >
+      <Form.Group className="mb-3" controlId="Titlu Categorie">
+        <Form.Label>Titlu Categorie</Form.Label>
         <InputGroup className="single-input-item">
           <Form.Control
             ref={catName}
@@ -89,19 +112,18 @@ const catName = useRef()
       </Form.Group>
       <span className=" h2">Descriere Categorie</span>
       <ConfiguredQuill
-        value={''}
+        value={inputCategory.description ?? ''}
+        // ref={quillRef}
         //handleChange
       />
       <Form.Label className=" h2">Poza Reprezentativa</Form.Label>
       <Form.Control
-      
         enctype="multipart/form-data"
         type="file"
         name="productCatImage"
         onChange={(e) => {
           e.preventDefault();
           handleChange.imageChange(e);
-          e.reset()
         }}
         accept="image/*"
         multiple={false}
