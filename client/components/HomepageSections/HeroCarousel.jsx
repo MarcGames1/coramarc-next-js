@@ -62,7 +62,7 @@ function HeroCarousel() {
                                
                             <span className={`h1  ${styles.text}`}>{item.title}</span>
                             <p className={`h3  ${styles.text}`}>{item.subtitle1} <span>{item.subtitle2}</span></p>
-                                        <Link href={item.href}><a href={item.href} class="btn btn-large btn-bg">{item.btnCta}</a></Link>
+                                        <Link href={item.href}><a href={item.href} className="btn btn-large btn-bg">{item.btnCta}</a></Link>
                            
                             </Carousel.Caption>
                     </Carousel.Item>)
