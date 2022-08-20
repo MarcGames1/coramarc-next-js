@@ -1,3 +1,6 @@
+import axios from "axios"
+
+
 export const carouselItemData =[
     {
     id:1,
@@ -32,6 +35,9 @@ export const carouselItemData =[
 
 
 ]
+
+
+
 
 // src = { "assets/img/slider/Carousel1.jpg"}
 // alt = { "Sandale Dama"}

@@ -3,11 +3,12 @@ import { OffCanvasSearchContext } from "../../../context/offCanvasSearchContext/
 import { UserInfo, UserSocialLinks } from "./components"
 import HeaderMiddleArea from "./HeaderMiddleArea"
 
+
 import MobileMenuHeaderContext from "./mobile.MenuHeaderContext"
 const M_Header = () =>{
 
     const [show, setShow] = useContext(OffCanvasSearchContext)
-    
+   
     return (
       <>
         {/* <!-- Start Header Area --> */}

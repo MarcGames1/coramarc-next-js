@@ -714,7 +714,9 @@ table tbody {
     /* display: none; */
   }
 }
-.scroll-top i {
+.scroll-top svg {
+  position:relative;
+  bottom:-25%;
   line-height: 50px;
   color: var(--bs-white);
   font-size: 25px;
@@ -726,6 +728,11 @@ table tbody {
 }
 .scroll-top:hover {
   background-color: var(--negru);
+  
+}
+.scroll-top:hover svg {
+  transition:all .5s;
+  bottom:0;
 }
 
 /* ----scroll to top css end ----*/

@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import {Col, Row, Container, Overlay} from 'react-bootstrap/';
 import Link from 'next/link';
-import { carouselItemData } from '../../helpers/CarouseltemData';
+import { carouselItemData } from '../../helpers/DB Queries';
 import styles from './HeroCarousel.module.css'
 
 // function HeroCarouselItem( props ){
