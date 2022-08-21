@@ -40,7 +40,8 @@ var bodyFormData = undefined;
       if (typeof bodyFormData === 'undefined') {
         bodyFormData = new FormData();
       }
-       bodyFormData.append('postImage', e.target.files[0])
+       bodyFormData.append('categoryImage', e.target.files[0]);
+       console.log("Asta e imaginea BAAAA!!!",e.target.files[0]);
     },
     submit_form: (e) => {
       e.preventDefault();
@@ -56,17 +57,16 @@ var bodyFormData = undefined;
     },
   };
 
-  const onFinish = () => {
+  const onFinish = async () => {
     
     try {
       setLoading(true);
       console.log('USER => ', auth.user._id);
 
-      const { data } = axios.post(
+      const { data } = await axios.post(
         `/category/create/${auth.user._id}`,
-        {
           bodyFormData,
-        },
+        
         { headers: { 'Content-Type': 'multipart/form-data' } }
       );
       console.log('DATA => ',  data);
