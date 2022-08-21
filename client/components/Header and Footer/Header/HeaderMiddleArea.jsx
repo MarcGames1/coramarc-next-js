@@ -65,7 +65,7 @@ const  HeaderMiddleArea = () =>{
                       <ul>
                         {
                           categories?.map((cat ) =>{
-                            return <NavElement key={cat._id} active ={ (`/${cat.slug}` === router.asPath)} text = {cat.name} href ={cat.slug}/>;
+                            return <NavElement key={cat._id} active ={ (`/${cat.slug}` === router.asPath)} text = {cat.name} href ={`/${cat.slug}`}/>;
                           })
                         }
                       </ul>

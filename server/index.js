@@ -8,7 +8,7 @@ import path from "path";
 require("dotenv").config();
 // import morgan from "morgan";
 
-
+// todo: Check if token is valid and if not signout and redirect to login
 
 
 //Import routes

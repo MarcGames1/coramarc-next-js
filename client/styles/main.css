@@ -1,12 +1,11 @@
-root{
-    $bs-primary {
-        /* color:red; */
-    }
+.nav-pills  {
+    --bs-primary:#87b106;
+    /* --bs-nav-pills-link-active-bg :red !important; */
+    --bs-nav-pills-link-active-bg:#87b106;
 }
 
-.nav-link:hover {
-    background-color: var(--bs-secondary)
-}
+
+/* #87b106 */
 
 /* a {
     cursor: pointer;

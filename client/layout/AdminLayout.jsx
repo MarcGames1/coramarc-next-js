@@ -10,9 +10,11 @@ import Button from 'react-bootstrap/Button';
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styles from './adminLayout.module.css'
-const SidebarMenu = (props) => (<Col className="bg-primary mx-0 px-0"
-    lg={2} sm md={2}><AdminSidebar toggleMenu={props.toggleMenu} />
-</Col>)
+const SidebarMenu = (props) => (
+  <Col className={`${styles.sidebar} mx-0 px-0`} lg={2} sm md={2}>
+    <AdminSidebar toggleMenu={props.toggleMenu} />
+  </Col>
+);
 
 
 import Header from '../Components/Header and Footer/Header';

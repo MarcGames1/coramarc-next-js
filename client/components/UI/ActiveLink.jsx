@@ -2,21 +2,13 @@ import Link from 'next/link'
 import Nav from 'react-bootstrap/Nav'
 
 
-const ActiveLink = (props) => {
+const ActiveLink = ({route, text, current_link}) => {
 
 
-    const get_className = () => {
-        if (props.route === props.current_link) {
-            return ("bg-black  text-white")
-        }
-
-        return (
-            "text-white"
-        )
-    }
+    const activeState =  (route === current_link) 
 
     return (
-        <Link href={props.route}><Nav.Link className={get_className()} href={props.route}>{props.text}</Nav.Link></Link>
+        <Link href={route}><Nav.Link active={activeState} href={route}>{text}</Nav.Link></Link>
     )
 }
 

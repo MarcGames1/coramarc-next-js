@@ -11,4 +11,12 @@
      
     /* border-radius: 50%; */
     }
-     
+     .sidebar{
+        background-color: var(--bs-gray-400);
+        text-align: center;
+     }
+
+      .sidebar span{
+        font-weight: bold;
+        font-size: 1.5em;
+      }

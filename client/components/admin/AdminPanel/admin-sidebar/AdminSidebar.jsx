@@ -24,17 +24,7 @@ let routes = {
     },
   ],
 
-  categorii: [
-    {
-      route: '/admin/categorii',
-      text: 'Vezi Categoriile',
-    },
 
-    {
-      route: '/admin/creaza-categorie',
-      text: 'Creaza Categorie Noua',
-    },
-  ],
 
   comenzi: [
     {
@@ -80,9 +70,17 @@ const AdminSidebar = (props) =>{
 
     return (
       <>
-        <Nav className="text-secondary flex-column" defaultActiveKey="/home">
-          <span className="text-black text-center h5">Produse</span>
-
+        <Nav variant={'pills'} fill defaultActiveKey={'/admin'}>
+          <ActiveLink
+            route={'/admin'}
+            current_link={current_link}
+            text="Panou Administrator"
+          />
+        </Nav>
+        <span className="text-black text-center font-weight-bold h5">
+          Produse
+        </span>
+        <Nav fill className="" variant={'pills'} defaultActiveKey="/home">
           {routes.produse.map((route, idx) => {
             return (
               <ActiveLink
@@ -93,26 +91,17 @@ const AdminSidebar = (props) =>{
               />
             );
           })}
-
-          <span className="text-black text-center h5">Categorii</span>
-          {routes.categorii.map((route, idx) => {
-            return (
-              <ActiveLink
-                route={route.route}
-                text={route.text}
-                current_link={current_link}
-                key={idx}
-              />
-            );
-          })}
-          <span className="text-black text-center h5">Comenzi</span>
+        </Nav>
+        <span className="text-black text-center h5">Comenzi</span>
+        <Nav fill className="" variant={'pills'} defaultActiveKey="/home">
           <ActiveLink
             route={routes.comenzi[0].route}
             current_link={current_link}
             text={routes.comenzi[0].text}
           />
-
-          <span className="text-black text-center h5">Blog</span>
+        </Nav>
+        <span className="text-black text-center h5">Blog</span>
+        <Nav fill className="" variant={'pills'} defaultActiveKey="/home">
           {routes.blog.map((route, idx) => {
             return (
               <ActiveLink

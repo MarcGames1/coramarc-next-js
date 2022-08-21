@@ -1,0 +1,23 @@
+.parteneri{
+padding:1em;
+margin:1em;    
+background-color:#fff;
+opacity:.8;
+width:100%; 
+height:100%
+}
+
+.centeredImage{
+    width:100%;
+    height:100%;
+    margin:auto;
+    display:flex;
+    justify-content:center ;
+    align-self:center ;
+    align-items:center ;
+    
+}
+
+.cpv{
+    background-color:#00C2FF;
+}
