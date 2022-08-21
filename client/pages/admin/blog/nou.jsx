@@ -94,7 +94,7 @@ const LocalStorageBlogData = () =>{
       console.log(blogData);
     },
 
-    savePost:  () => {
+    savePost: async () => {
 if(typeof(bodyFormData)=== 'undefined'){
   bodyFormData =new FormData();
 }
@@ -105,7 +105,7 @@ if(typeof(bodyFormData)=== 'undefined'){
       // bodyFormData.append({blogData });
       const postLoading = toast.loading('Saving post...');
 
-      const { data } =  axios.post(
+      const { data } =  await axios.post(
         `/post/create/${auth.user._id}`,
         bodyFormData,
         { headers: { 'Content-Type': 'multipart/form-data' } }
