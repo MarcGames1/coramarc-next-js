@@ -23,8 +23,26 @@ router.post(
   uploadPostImage,
   create,
 );
+router.put(
+  '/post/:postId/:userId',
+  requireSignin,
+  isAuth,
+  isAdmin,
+  update
+);
+
+router.delete(
+  '/post/:postId/:userId',
+  requireSignin,
+  isAuth,
+  isAdmin,
+  remove
+);
+router.get('/categories', list);
 
 router.post('/post/create/upload', uploadPostImage);
+
+router.param('postId', postById);
 router.param('userId', userById);
 
 

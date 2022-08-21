@@ -1,6 +1,6 @@
 const Category = require("../models/category")
 import slugify from 'slugify';
-
+import fs from 'fs';
 exports.categoryById = (req, res, next, id) => {
     Category.findById(id).exec((err, category) =>{
         if(err || !category) {
@@ -56,6 +56,11 @@ exports.update = (req,res) =>{
 
 exports.remove = (req, res) => {
     const category = req.category
+    console.log(category)
+    fs.unlink(`${category.Image.path}${category.Image.name}`, (err)=>{
+        console.log(err)
+        console.log(category.Image.path, '/ ', category.Image.name);
+    });
     category.remove((err, data) => {
         if(err) {
             return res.status(400).json({
