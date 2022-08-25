@@ -15,19 +15,17 @@ import '../styles/main.css'
 
 config.autoAddCss = false
 function MyApp({ Component, pageProps }) {
-    return(
-        <>
-
-        <head>
-            <meta name='robots' content='noindex,nofollow' />
-        </head>        
+    return (
+      <>
+        <Head>
+          <meta name="robots" content="noindex,nofollow" />
+        </Head>
         <AuthProvider>
-        <Toaster />
-        <Component {...pageProps} />
+          <Toaster />
+          <Component {...pageProps} />
         </AuthProvider>
-
-        </>
-    ) 
+      </>
+    ); 
     
     
 }
