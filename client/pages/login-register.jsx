@@ -1,6 +1,6 @@
 import { Signin, Signup } from "../components/SignIn-SignUp"
 import { Container, Row, Col, Card, CardGroup } from "react-bootstrap"
-import MainLayout from "../Layout/MainLayout"
+import MainLayout from "../layout/MainLayout"
 import Breadcrumbs from "nextjs-breadcrumbs";
 import {useEffect, useContext, useState} from 'react'
 import { useRouter } from "next/router";
