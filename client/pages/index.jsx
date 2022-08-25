@@ -7,10 +7,10 @@ import {  AuthContext  } from "../context/auth"
 // import Slider from "../components/HomePage/Slider/Slider"
 
 
-import { HeroCarousel,  } from "../Components/HomepageSections";
+import { HeroCarousel,  } from "../components/HomepageSections";
 
 
-import HomePageLayout from '../Layout/HomepageLayout';
+import HomePageLayout from '../layout/HomepageLayout';
 
 export default function Home() {
 const [auth, setAuth] = useContext(AuthContext)
