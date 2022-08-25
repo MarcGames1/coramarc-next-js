@@ -1,5 +1,5 @@
-import { MainFooter } from '../Components/Header and Footer/Footer';
-import Header from '../Components/Header and Footer/Header';
+import { MainFooter } from '../components/Header and Footer/Footer';
+import Header from '../components/Header and Footer/Header';
 import { ScrollPositionProvider } from '../context/ScrollPositionContext/ScrollPositionContext';
 
 const banner = '/assets/img/banner/shop.jpg';

@@ -1,5 +1,5 @@
-import { MainFooter } from "../Components/Header and Footer/Footer"
-import Header from "../Components/Header and Footer/Header"
+import { MainFooter } from "../components/Header and Footer/Footer"
+import Header from "../components/Header and Footer/Header"
 import { ScrollPositionProvider } from "../context/ScrollPositionContext/ScrollPositionContext"
 import Breadcrumbs from 'nextjs-breadcrumbs'
 import Image from 'next/image'
