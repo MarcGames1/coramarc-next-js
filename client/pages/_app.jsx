@@ -18,7 +18,9 @@ function MyApp({ Component, pageProps }) {
     return(
         <>
 
-                
+        <head>
+            <meta name='robots' content='noindex,nofollow' />
+        </head>        
         <AuthProvider>
         <Toaster />
         <Component {...pageProps} />
