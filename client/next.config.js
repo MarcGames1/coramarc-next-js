@@ -1,6 +1,6 @@
 module.exports = {
   images: {
-    domains: ['www.librabank.ro', 'www.fancourier.ro', 'clientipeviata.ro'],
+    domains: ['www.librabank.ro', 'www.fancourier.ro', 'localhost'],
   },
   reactStrictMode: true,
 };

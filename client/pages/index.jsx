@@ -12,7 +12,7 @@ import { HeroCarousel,  } from "../components/HomepageSections";
 
 import HomePageLayout from '../layout/HomepageLayout';
 
-export default function Home() {
+export default function Home({data}) {
 const [auth, setAuth] = useContext(AuthContext)
 
 
@@ -28,10 +28,29 @@ const [auth, setAuth] = useContext(AuthContext)
         <HomePageLayout>
           
           <HeroCarousel />
+        <div className="container">
+         {data.map((category)=>{
+          return(<>
+          {category.name}
+          </>)
+         })}
+        </div>
         </HomePageLayout>
       </>
     );
 
 
 
+}
+
+
+export async function getStaticProps(){
+  const response = await fetch('http://localhost:8000/api/categories/');
+  const data = await response.json();
+  console.log(data)
+  return{
+    props:{
+      data
+    }
+  }
 }

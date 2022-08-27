@@ -32,3 +32,8 @@ a{
 }
 
 
+
+
+.quill  .ql-toolbar:first-child{
+  display: none !important;
+}

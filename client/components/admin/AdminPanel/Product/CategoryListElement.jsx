@@ -9,23 +9,27 @@ import {
   ButtonGroup,
   InputGroup,
   Form,
-  Alert} from 'react-bootstrap';
+  Alert,
+  Modal} from 'react-bootstrap';
 import axios from 'axios';
 import { useState, useContext } from 'react';
 import { AuthContext } from '../../../../context/auth';
 import { CategoryContext } from './categoryContext/categoryContext';
 import toast from 'react-hot-toast';
+import UpdateProductCategory from './UpdateProductCategory';
 
 
 const CategoryListElement = (props) => {
 
   const [categories, setCategories, getCategories] = useContext(CategoryContext);
   const [auth, setAuth] = useContext(AuthContext);
-
-//STATE
-const [show, setShow] = useState(false)
-const [inputData, setInputData] = useState()
+  //STATE
+  const [show, setShow] = useState(false)
+  const [showModal, setShowModal] = useState(false);
+  const [inputData, setInputData] = useState()
     
+ 
+ 
 
 
   const handler = {
@@ -47,6 +51,8 @@ const [inputData, setInputData] = useState()
       setShow(false)
       getCategories();
     },
+    handleCloseModal:() => setShowModal(false),
+    handleShowModal: () => setShowModal(true),
 
     change:(e)=>{
         e.preventDefault()
@@ -73,9 +79,7 @@ const [inputData, setInputData] = useState()
               <FontAwesomeIcon icon={faCircleXmark} /> Sterge
             </Button>
             <Button
-              onClick={()=>{
-                setShow(!show)
-              }}
+              onClick={handler.handleShowModal}
               variant="warning"
               type="submit"
             >
@@ -83,21 +87,45 @@ const [inputData, setInputData] = useState()
             </Button>
           </ButtonGroup>
 
-         { show ?  <InputGroup onChange={handler.change} className="mb-3">
-            <Form.Control
-              placeholder={props.name}
-              aria-label={props.name}
-              aria-describedby={`Modifica Categoria ${props.name}`}
-              defaultValue={props.name}
-            />
-            <Button type='submit' onClick={()=>{
-                handler.update(props._id, inputData)
-            }} variant="outline-secondary" id={props._id}>
-              Confirma
-            </Button>
-          </InputGroup> : null}
+          {show ? (
+            <InputGroup onChange={handler.change} className="mb-3">
+              <Form.Control
+                placeholder={props.name}
+                aria-label={props.name}
+                aria-describedby={`Modifica Categoria ${props.name}`}
+                defaultValue={props.name}
+              />
+              <Button
+                type="submit"
+                onClick={() => {
+                  handler.update(props._id, inputData);
+                }}
+                variant="outline-secondary"
+                id={props._id}
+              >
+                Confirma
+              </Button>
+            </InputGroup>
+          ) : null}
         </Row>
       </Alert>
+
+      <Modal show={showModal} onHide={handler.handleCloseModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modifica categoria {props.name}</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <UpdateProductCategory {...props}/>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handler.handleCloseModal}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handler.update}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

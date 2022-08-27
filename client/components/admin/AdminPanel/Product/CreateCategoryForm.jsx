@@ -11,6 +11,8 @@ import { Form, InputGroup } from 'react-bootstrap';
 import LoadingBtn from "../../../UI/LoadingBtn";
 import { CategoryContext } from './categoryContext/categoryContext';
 import ConfiguredQuill from '../../../../quill/ConfiguredQuill'
+
+
 const CreateCategoryForm = () => {
 
   const [auth, setAuth] = useContext(AuthContext);
@@ -41,7 +43,7 @@ var bodyFormData = undefined;
         bodyFormData = new FormData();
       }
        bodyFormData.append('categoryImage', e.target.files[0]);
-       console.log("Asta e imaginea BAAAA!!!",e.target.files[0]);
+       
     },
     submit_form: (e) => {
       e.preventDefault();
@@ -114,8 +116,9 @@ var bodyFormData = undefined;
       <ConfiguredQuill
         value={inputCategory.description ?? ''}
         // ref={quillRef}
-        //handleChange
+        onChange={handleChange.description}
       />
+      
       <Form.Label className=" h2">Poza Reprezentativa</Form.Label>
       <Form.Control
         enctype="multipart/form-data"

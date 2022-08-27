@@ -42,7 +42,15 @@ exports.read = (req,res) =>{
 exports.update = (req,res) =>{
     const category = req.category
     category.name = req.body.name
-
+    category.description = req.body.description
+    //delete previous image
+    if(category.Image !== req.body.image){
+        fs.unlink(`${category.Image.path}${category.Image.name}`, (err) => {
+          console.log(err);
+          console.log(category.Image.path, '/ ', category.Image.name);
+        });
+    }
+    category.Image = req.body.Image
     category.save((err, data) =>{
         if(err){
             return res.status(400).json({
