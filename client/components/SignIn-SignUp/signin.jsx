@@ -17,6 +17,7 @@ import {
 import dynamic from "next/dynamic";
 import toast from 'react-hot-toast';
 import axios from 'axios';
+import Link from 'next/link';
 
 const FontAwesomeIcon = dynamic(async () => (
   (await import("@fortawesome/react-fontawesome")).FontAwesomeIcon
@@ -89,7 +90,7 @@ const FontAwesomeIcon = dynamic(async () => (
             <Form.Control
               onChange={handleChange.email}
               type="email"
-              placeholder="Enter email"
+              placeholder="Adresa de email"
             />
             <InputGroup.Text>
               <FontAwesomeIcon icon={faEnvelope} />
@@ -119,8 +120,12 @@ const FontAwesomeIcon = dynamic(async () => (
             </InputGroup.Text>
           </InputGroup>
         </Form.Group>
-
-        <LoadingBtn loading={loading} variant={'primary'} text={'Logare'} />
+        <div className="row">
+          <LoadingBtn loading={loading} variant={'primary'} text={'Logare'} />
+          <Link href="/forgot-password">
+            <a className="text-center m-2 usefull-links ">Am uitat Parola</a>
+          </Link>
+        </div>
       </Form>
     </>
   );

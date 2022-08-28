@@ -1,6 +1,6 @@
 import React from 'react'
 import Breadcrumbs from 'nextjs-breadcrumbs';
-export default function ({title, img}) {
+export default function BreadCrumbTitle({title, img}) {
     
     //  `https://wallpaperaccess.com/full/109666.jpg`;
     const styling = {

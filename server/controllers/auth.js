@@ -8,8 +8,8 @@ require('dotenv').config();
 
 // sendgrid
 
-// const sgMail = require("@sendgrid/mail");
-// sgMail.setApiKey(process.env.SENDGRID_KEY);
+const sgMail = require("@sendgrid/mail");
+sgMail.setApiKey(process.env.SENDGRID_KEY);
 
 export const signup = async (req, res) => {
   console.log("HIT SIGNUP", req.body);

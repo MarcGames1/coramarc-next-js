@@ -5,9 +5,9 @@ import Breadcrumbs from 'nextjs-breadcrumbs'
 import Image from 'next/image'
 import { Container, Row, Col } from "react-bootstrap"
 
-const banner = '/assets/img/banner/shop.jpg';
 
 const MainLayout = (props) =>{
+  const banner = props?.image ? props.image : '/assets/img/banner/shop.jpg';
 return (
   <>
     <ScrollPositionProvider>
@@ -17,7 +17,15 @@ return (
           <Col>
             <div
               className="breadcrumb-area breadcrumb-img bg-img"
-              style={{ backgroundImage: `url('${banner}')` }}
+              style={{
+                // backgroundColor: `rgba(0, 0, 0, .5)`,
+                backgroundImage: `url('${banner}')`,
+                backgroundRepeat: 'no-repeat',
+                backgroundSize: 'cover',
+                // opacity:0.7,
+                filter: 'brightness(90%)',
+                // mixBlendMode: 'darken',
+              }}
             >
               {/* <Image src={banner} width={1920} height={250}/> */}
 
