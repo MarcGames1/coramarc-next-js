@@ -66,3 +66,46 @@ const upload = multer({ storage: storage }).single('categoryImage');
         }
     });
 }
+
+
+export const uploadProductImage = (req, res, next) => {
+  const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './public/product-cat/');
+    },
+
+    filename: function (req, file, cb) {
+      const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
+      cb(
+        null,
+        file.originalname +
+          '-' +
+          file.fieldname +
+          '-' +
+          uniqueSuffix +
+          path.extname(file.originalname)
+      );
+    },
+  });
+
+  const upload = multer({ storage: storage }).array('categoryImage');
+
+  upload(req, res, (err) => {
+    if (err) {
+      res.json(err);
+    } else {
+      console.log('File => ', req.files);
+      console.log('Path => ', path.dirname(req.files.path));
+      console.log(
+        'Path => ',
+        path.join(req.file.destination, req.file.filename)
+      );
+      req.body.Image = {
+        name: req.files.filename,
+        path: req.files.destination,
+        fullPath: path.join(req.files.destination, req.files.filename),
+      };
+      next();
+    }
+  });
+};

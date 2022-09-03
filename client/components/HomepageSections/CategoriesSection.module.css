@@ -1,0 +1,26 @@
+.col{
+    margin-top:1rem;
+    margin-bottom:1rem;
+}
+.card:hover{
+    background-color:red;
+    
+}
+
+.card:hover img{
+   opacity:90%;
+
+}       
+
+.card:hover div{
+    background-color:var(--primary-color);
+    opacity:30%;
+}
+
+.card:hover div:first-child{
+    opacity:100%;
+    color:var(--bs-dark-rgb);
+}
+    
+    
+    

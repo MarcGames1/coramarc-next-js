@@ -5,9 +5,9 @@ import {  AuthContext  } from "../context/auth"
 // import { faStar, faHeart, faCart as faCartShopping } from "@fortawesome/free-solid-svg-icons"
 // import Head from "next/head"
 // import Slider from "../components/HomePage/Slider/Slider"
+import {Row} from 'react-bootstrap/'
 
-
-import { HeroCarousel,  } from "../components/HomepageSections";
+import { CategoriesSection, HeroCarousel, ServicePolicy,  } from "../components/HomepageSections";
 
 
 import HomePageLayout from '../layout/HomepageLayout';
@@ -18,7 +18,7 @@ const [auth, setAuth] = useContext(AuthContext)
 
     
 
-
+console.log("DATA=> ", data)
     
 
 
@@ -28,13 +28,31 @@ const [auth, setAuth] = useContext(AuthContext)
         <HomePageLayout>
           
           <HeroCarousel />
+          <ServicePolicy />
         <div className="container">
          {data.map((category)=>{
-          return(<>
-          {category.name}
-          </>)
+          return (
+            <Row>
+              <CategoriesSection {...category} />
+              <CategoriesSection {...category} />
+              <CategoriesSection {...category} />
+              <CategoriesSection {...category} />
+              <CategoriesSection {...category} />
+              <CategoriesSection {...category} />
+              <CategoriesSection {...category} />
+              <CategoriesSection {...category} />
+              <CategoriesSection {...category} />
+              <CategoriesSection {...category} />
+              <CategoriesSection {...category} />
+              <CategoriesSection {...category} />
+              <CategoriesSection {...category} />
+              <CategoriesSection {...category} />
+              <CategoriesSection {...category} />
+            </Row>
+          );
          })}
         </div>
+        
         </HomePageLayout>
       </>
     );

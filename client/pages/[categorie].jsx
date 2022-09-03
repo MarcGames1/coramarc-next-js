@@ -24,7 +24,7 @@ export default function Categorie({data}) {
       <CategoryLayiout>
         <BreadcrumbTitle
           title={data.name}
-          img={`http://localhost:8000/product-cat/${data.Image.name}`}
+          img={`http://localhost:8000/product-cat/title.jpg`}
         />
         <Container>
           <Row>

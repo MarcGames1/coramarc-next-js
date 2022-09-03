@@ -3109,6 +3109,8 @@ ul.minicart-pricing-box li:last-child {
   border: 1px solid #e5e5e5;
   -webkit-transition: 0.4s;
   transition: 0.4s;
+  min-height: 26rem!important;
+  max-height: 26rem!important;
 }
 @media only screen and (min-width: 992px) and (max-width: 1199.98px),
   only screen and (max-width: 767.98px) {

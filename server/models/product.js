@@ -21,33 +21,46 @@ const productSchema = new mongoose.Schema(
     },
 
     discount: {
-      type: Number,
-      trim: true,
+      Type: Boolean,
+      default: false,
+      discountedPrice: { type: Number, trim: true, default: null },
     },
 
     color: {
       name: String,
       hex: String,
-      size: [
-        {
-          type: Number,
-          quantity: Number,
-        },
-      ],
-      
-
-      Image: {
-        type: Object,
+      Image: [{ type: Object }],
+    },
+    codIntern: {
+      type: String,
+      trim: true,
+      required: true,
+      unique: true,
+    },
+    size: {
+      nr: {
+        type: Number,
+        trim: true,
+        maxlength: 2,
+      },
+      cm: {
+        type: Number,
+        trim: true,
+        maxlength: 3,
       },
     },
-
+    image: [
+      {
+        type: Object,
+      },
+    ],
     category: {
       type: ObjectId,
       ref: 'Category',
       required: true,
     },
 
-    content: {},
+    content: { type: String, trim: true },
   },
   { timestamps: true }
 );
