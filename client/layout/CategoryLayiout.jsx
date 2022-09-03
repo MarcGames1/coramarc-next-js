@@ -9,7 +9,7 @@ export default function CategoryLayiout(props) {
       <ScrollPositionProvider>
         <Header />
 
-        <main className="main-layout m-1">{props.children}</main>
+        <main className="main-layout">{props.children}</main>
         <MainFooter />
       </ScrollPositionProvider>
     </>
