@@ -1,4 +1,4 @@
-import { NavItem } from "react-bootstrap";
+import { Container, NavItem ,Row, Col} from "react-bootstrap";
 import AdminLayout from "../../../layout/AdminLayout"
 import changeProduct from "./changeProduct";
 import React, {useState, useContext} from "react";
@@ -64,13 +64,13 @@ const AdaugaProdus = () => {
      },
    },
    image: (e) => {
-     setProduct(changeProduct('image', e.target.value, product));
+     setProduct(changeProduct('image', e, product));
    },
    category: (e) => {
      setProduct(changeProduct('category', e.target.value, product));
    },
    content: (e) => {
-     setProduct(changeProduct('content', e.target.value, product));
+     setProduct(changeProduct('content', e, product));
    },
  };
     
@@ -78,81 +78,87 @@ const AdaugaProdus = () => {
     return (
       <AdminLayout>
         <CategoryProvider>
+          <h1 className="text-center">Adauga Produs</h1>
+          <Container>
+            <Row>
+              <Form>
+                <FloatingLabel
+                  onChange={change.name}
+                  controlId="floatingTextarea"
+                  label="Nume Produs"
+                  className="mb-3"
+                >
+                  <Form.Control as="textarea" placeholder="Nume Produs" />
+                </FloatingLabel>
+                <FloatingLabel controlId="floatingTextarea2" label="Descriere">
+                  <Form.Control
+                    as="textarea"
+                    placeholder="Descriere scurta"
+                    style={{ height: '100px' }}
+                  />
+                </FloatingLabel>
+                <Col>
+                  <FloatingLabel
+                    controlId="floatingInput"
+                    label="Pret"
+                    className="mb-3"
+                  >
+                    <Form.Control type="number" />
+                  </FloatingLabel>
+                </Col>
+                <FloatingLabel
+                  controlId="floatingInput"
+                  label="Discount"
+                  className="mb-3"
+                >
+                  <Form.Control type="number" />
+                </FloatingLabel>
+                <FloatingLabel
+                  onChange={change.color.name}
+                  controlId="floatingTextarea"
+                  label="Culoare"
+                  className="mb-3"
+                >
+                  <Form.Control as="textarea" placeholder="Culoare" />
+                </FloatingLabel>
+                <Form.Label htmlFor="ColorInput">Cod Culoare</Form.Label>
+                <Form.Control
+                  onChange={change.color.hex}
+                  type="color"
+                  defaultValue="#563d7c"
+                  title="Cod Culoare"
+                />
 
-        <h1>Adauga Produs</h1>
+                <FloatingLabel
+                  onChange={change.size.cm}
+                  controlId="floatingTextarea"
+                  label="Marime (Cm)"
+                  className="mb-3"
+                >
+                  <Form.Control type="number" placeholder="Culoare" />
+                </FloatingLabel>
+                <FloatingLabel
+                  onChange={change.size.nr}
+                  controlId="floatingTextarea"
+                  label="Marime - NR"
+                  className="mb-3"
+                >
+                  <Form.Control type="number" placeholder="Culoare" />
+                </FloatingLabel>
 
-        <Form>
-          <FloatingLabel
-            onChange={change.name}
-            controlId="floatingTextarea"
-            label="Nume Produs"
-            className="mb-3"
-            >
-            <Form.Control as="textarea" placeholder="Nume Produs" />
-          </FloatingLabel>
-          <FloatingLabel controlId="floatingTextarea2" label="Descriere">
-            <Form.Control
-              as="textarea"
-              placeholder="Descriere scurta"
-              style={{ height: '100px' }}
-            />
-          </FloatingLabel>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="Pret"
-            className="mb-3"
-            >
-            <Form.Control type="number" />
-          </FloatingLabel>
-          <FloatingLabel
-            controlId="floatingInput"
-            label="Discount"
-            className="mb-3"
-            >
-            <Form.Control type="number" />
-          </FloatingLabel>
+                <ConfiguredQuill onChange={change.content} />
 
-          <FloatingLabel
-            onChange={change.color.name}
-            controlId="floatingTextarea"
-            label="Culoare"
-            className="mb-3"
-            >
-            <Form.Control as="textarea" placeholder="Culoare" />
-          </FloatingLabel>
-          <Form.Label htmlFor="ColorInput">Cod Culoare</Form.Label>
-          <Form.Control
-            onChange={change.color.hex}
-            type="color"
-            defaultValue="#563d7c"
-            title="Cod Culoare"
-            />
+                <ProductcategoriesOptions />
+                <Form.Group controlId="formFileMultiple" className="mb-3">
+                  <Form.Label>Multiple files input example</Form.Label>
+                  <Form.Control type="file" multiple />
+                </Form.Group>
+              </Form>
+            </Row>
+          </Container>
 
-          <FloatingLabel
-            onChange={change.size.cm}
-            controlId="floatingTextarea"
-            label="Marime (Cm)"
-            className="mb-3"
-            >
-            <Form.Control type="number" placeholder="Culoare" />
-          </FloatingLabel>
-          <FloatingLabel
-            onChange={change.size.nr}
-            controlId="floatingTextarea"
-            label="Marime - NR"
-            className="mb-3"
-            >
-            <Form.Control type="number" placeholder="Culoare" />
-          </FloatingLabel>
-
-          <ConfiguredQuill />
-
-        <ProductcategoriesOptions />
-        </Form>
-        <CategoryProvider>
-            </CategoryProvider>
+          <CategoryProvider></CategoryProvider>
         </CategoryProvider>
-
       </AdminLayout>
     );
 }

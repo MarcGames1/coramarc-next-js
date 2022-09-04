@@ -64,7 +64,8 @@ const changeProduct = (item, e, product) => {
       break;
 
     case 'content':
-      product.content = e.target.value;
+      product.content = e;
+      console.log(e)
       break;
 
     }
