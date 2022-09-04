@@ -37,6 +37,7 @@ const AdaugaProdus = () => {
    },
    description: (e) => {
      setProduct(changeProduct('description', e.target.value, product));
+      console.log('STATE Description CHANGED, ', product);
    },
    price: (e) => {
      setProduct(changeProduct('price', e.target.value, product));
@@ -70,10 +71,15 @@ const AdaugaProdus = () => {
      setProduct(changeProduct('category', e.target.value, product));
    },
    content: (e) => {
+    console.log(e)
      setProduct(changeProduct('content', e, product));
    },
  };
     
+ const handleSubmit = (e) => {
+  e.preventDefault()
+  console.log(product)
+ }
 
     return (
       <AdminLayout>
@@ -81,7 +87,9 @@ const AdaugaProdus = () => {
           <h1 className="text-center">Adauga Produs</h1>
           <Container>
             <Row>
-              <Form>
+              <Form 
+              type="multipart/form-data"
+              onSubmit={handleSubmit}>
                 <FloatingLabel
                   onChange={change.name}
                   controlId="floatingTextarea"
@@ -90,7 +98,12 @@ const AdaugaProdus = () => {
                 >
                   <Form.Control as="textarea" placeholder="Nume Produs" />
                 </FloatingLabel>
-                <FloatingLabel controlId="floatingTextarea2" label="Descriere">
+                <FloatingLabel
+                  onChange={change.description}
+                  controlId="Descriere Scurta"
+                  label="Descriere"
+
+                >
                   <Form.Control
                     as="textarea"
                     placeholder="Descriere scurta"
@@ -99,7 +112,8 @@ const AdaugaProdus = () => {
                 </FloatingLabel>
                 <Col>
                   <FloatingLabel
-                    controlId="floatingInput"
+                    onChange={change.price}
+                    controlId="pretProdus"
                     label="Pret"
                     className="mb-3"
                   >
@@ -107,7 +121,8 @@ const AdaugaProdus = () => {
                   </FloatingLabel>
                 </Col>
                 <FloatingLabel
-                  controlId="floatingInput"
+                  onChange={change.discountedPrice}
+                  controlId="Discount"
                   label="Discount"
                   className="mb-3"
                 >
@@ -153,6 +168,7 @@ const AdaugaProdus = () => {
                   <Form.Label>Multiple files input example</Form.Label>
                   <Form.Control type="file" multiple />
                 </Form.Group>
+                <button type="submit">Submit</button>
               </Form>
             </Row>
           </Container>
