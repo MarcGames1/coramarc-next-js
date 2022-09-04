@@ -54,7 +54,7 @@ let productCatUri = 'http://localhost:8000/product-cat/';
               
               onChange={handleChange.name}
               type="text"
-              placeholder={currentCategory.name}
+              // placeholder={currentCategory.name}
               
             />
           </InputGroup>

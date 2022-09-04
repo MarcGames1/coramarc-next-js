@@ -19,12 +19,11 @@ const productSchema = new mongoose.Schema(
       required: true,
       maxlength: 32,
     },
+    discountedPrice: { type: Number, trim: true, default: NaN },
 
-    discount: {
-      Type: Boolean,
-      default: false,
-      discountedPrice: { type: Number, trim: true, default: null },
-    },
+    
+      
+    
 
     color: {
       name: String,
@@ -42,6 +41,7 @@ const productSchema = new mongoose.Schema(
         type: Number,
         trim: true,
         maxlength: 2,
+        required: true,
       },
       cm: {
         type: Number,
@@ -54,11 +54,11 @@ const productSchema = new mongoose.Schema(
         type: Object,
       },
     ],
-    category: {
+    category: [{
       type: ObjectId,
       ref: 'Category',
       required: true,
-    },
+    }],
 
     content: { type: String, trim: true },
   },

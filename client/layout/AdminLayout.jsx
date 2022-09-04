@@ -37,7 +37,10 @@ const getUserData = async(userData) =>{
         setLoading(false)
       }
     } catch(err){
-      
+      setAuth({
+        user: null,
+        token: '',
+      });
       toast.error("Unauhorized")
       router.push('/')
     }
@@ -47,7 +50,7 @@ const getUserData = async(userData) =>{
 
 
 
-    const [auth] = useContext(AuthContext)
+    const [auth, setAuth] = useContext(AuthContext);
 
     const [hidden, setHidden] = useState(false)
     const [loading, setLoading] = useState(true)
