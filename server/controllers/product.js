@@ -35,6 +35,7 @@ exports.create = async (req, res) => {
     image,
     content,
   } = req.body;
+  console.log ("Creating product")
   const product = await new Product({
     name,
     description,

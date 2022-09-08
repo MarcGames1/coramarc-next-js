@@ -7,8 +7,13 @@ import ConfiguredQuill from "../../../quill/ConfiguredQuill";
 import Select from 'react-select';
 import ProductcategoriesOptions from "../../../components/UI/ProductcategoriesOptions";
 import { CategoryContext, CategoryProvider } from "../../../components/admin/AdminPanel";
+import LoadingBtn from "../../../components/UI/LoadingBtn";
+import axios from 'axios'
+import { AuthContext } from "../../../context/auth";
+
 const AdaugaProdus = () => {
     
+  const [auth, setAuth] = useContext(AuthContext);
 
 
 
@@ -29,7 +34,7 @@ const AdaugaProdus = () => {
     };
     const [product, setProduct] = useState(initialState);
     const [discount, setDiscount] = useState(false);
-
+    const [loading, setLoading] = useState(false);
  const change = {
    name: (e) => {
      setProduct(changeProduct('name', e.target.value, product));
@@ -76,10 +81,31 @@ const AdaugaProdus = () => {
    },
  };
     
+const postProduct = async (bodyFormData) => {
+  const { data } = await axios.post(
+    `/product/create/${auth.user._id}`,
+    bodyFormData,
+
+    { headers: { 'Content-Type': 'multipart/form-data' } }
+  );
+};
+
  const handleSubmit = (e) => {
   e.preventDefault()
-  console.log(product)
+  // console.log(product)
+  let bodyFormData = new FormData()
+ for (const key in product){
+  console.log(`${key} : ${product[key]}`)
+  bodyFormData.append(key, product[key])
+}
+
+
+postProduct(bodyFormData)
+  console.log(bodyFormData)
  }
+
+
+
 
     return (
       <AdminLayout>
@@ -87,9 +113,7 @@ const AdaugaProdus = () => {
           <h1 className="text-center">Adauga Produs</h1>
           <Container>
             <Row>
-              <Form 
-              type="multipart/form-data"
-              onSubmit={handleSubmit}>
+              <Form type="multipart/form-data" onSubmit={handleSubmit}>
                 <FloatingLabel
                   onChange={change.name}
                   controlId="floatingTextarea"
@@ -102,7 +126,6 @@ const AdaugaProdus = () => {
                   onChange={change.description}
                   controlId="Descriere Scurta"
                   label="Descriere"
-
                 >
                   <Form.Control
                     as="textarea"
@@ -168,7 +191,12 @@ const AdaugaProdus = () => {
                   <Form.Label>Multiple files input example</Form.Label>
                   <Form.Control type="file" multiple />
                 </Form.Group>
-                <button type="submit">Submit</button>
+               
+                <LoadingBtn
+                  loading={loading}
+                  variant={'primary'}
+                  text={'Adauga Produsul'}
+                />
               </Form>
             </Row>
           </Container>
