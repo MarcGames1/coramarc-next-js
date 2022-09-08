@@ -71,7 +71,7 @@ const upload = multer({ storage: storage }).single('categoryImage');
 export const uploadProductImage = (req, res, next) => {
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './public/product-cat/');
+      cb(null, './public/product-img/');
     },
 
     filename: function (req, file, cb) {
@@ -79,8 +79,8 @@ export const uploadProductImage = (req, res, next) => {
       cb(
         null,
         file.originalname +
-          '-' +
-          file.fieldname +
+          
+        
           '-' +
           uniqueSuffix +
           path.extname(file.originalname)
@@ -88,7 +88,7 @@ export const uploadProductImage = (req, res, next) => {
     },
   });
 
-  const upload = multer({ storage: storage }).array('categoryImage');
+  const upload = multer({ storage: storage }).array('productImage');
 
   upload(req, res, (err) => {
     if (err) {
