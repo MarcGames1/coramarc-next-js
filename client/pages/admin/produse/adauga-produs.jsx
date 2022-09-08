@@ -70,7 +70,8 @@ const AdaugaProdus = () => {
      },
    },
    image: (e) => {
-     setProduct(changeProduct('image', e, product));
+     //  setProduct(changeProduct('image', e, product));
+     // e.target.files[0] de vazut cum faci upload la fisiere multiple
    },
    category: (e) => {
      setProduct(changeProduct('category', e.target.value, product));
@@ -189,9 +190,9 @@ postProduct(bodyFormData)
                 <ProductcategoriesOptions />
                 <Form.Group controlId="formFileMultiple" className="mb-3">
                   <Form.Label>Multiple files input example</Form.Label>
-                  <Form.Control type="file" multiple />
+                  <Form.Control type="file" accept="image/*" multiple />
                 </Form.Group>
-               
+
                 <LoadingBtn
                   loading={loading}
                   variant={'primary'}
