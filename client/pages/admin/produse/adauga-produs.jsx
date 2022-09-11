@@ -70,8 +70,8 @@ const AdaugaProdus = () => {
      },
    },
    image: (e) => {
-     //  setProduct(changeProduct('image', e, product));
-     // e.target.files[0] de vazut cum faci upload la fisiere multiple
+      setProduct(changeProduct('image', e, product));
+     console.log(e.target.files) 
    },
    category: (e) => {
      setProduct(changeProduct('category', e.target.value, product));
@@ -82,27 +82,42 @@ const AdaugaProdus = () => {
    },
  };
     
-const postProduct = async (bodyFormData) => {
+const postProduct = async () => {
+  var bodyFormData = new FormData();
+  for (const key in product) {
+    console.log(`${key} : ${product[key]}`);
+    bodyFormData.append(key, product[key]);
+  }
+  for (const pair of bodyFormData.entries()) {
+    console.log(`${pair[0]}, ${pair[1]}`);
+  }
+  
   const { data } = await axios.post(
     `/product/create/${auth.user._id}`,
     bodyFormData,
-
     { headers: { 'Content-Type': 'multipart/form-data' } }
-  );
+
+  ).then((success, error)=>{
+    if (success) {
+      console.log(data)
+    } else{
+      console.log(error)
+    }
+  })
+
+
 };
 
  const handleSubmit = (e) => {
   e.preventDefault()
   // console.log(product)
-  let bodyFormData = new FormData()
- for (const key in product){
-  console.log(`${key} : ${product[key]}`)
-  bodyFormData.append(key, product[key])
-}
+ postProduct()
 
 
-postProduct(bodyFormData)
-  console.log(bodyFormData)
+
+
+
+  
  }
 
 
@@ -114,7 +129,7 @@ postProduct(bodyFormData)
           <h1 className="text-center">Adauga Produs</h1>
           <Container>
             <Row>
-              <Form type="multipart/form-data" onSubmit={handleSubmit}>
+              <Form enctype="multipart/form-data" onSubmit={handleSubmit}>
                 <FloatingLabel
                   onChange={change.name}
                   controlId="floatingTextarea"
@@ -202,7 +217,7 @@ postProduct(bodyFormData)
             </Row>
           </Container>
 
-          <CategoryProvider></CategoryProvider>
+          
         </CategoryProvider>
       </AdminLayout>
     );

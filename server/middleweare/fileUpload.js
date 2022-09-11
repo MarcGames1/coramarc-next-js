@@ -68,13 +68,14 @@ const upload = multer({ storage: storage }).single('categoryImage');
 }
 
 
-export const uploadProductImage = (req, res, next) => {
+export const uploadProductImages = (req, res, next) => {
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, './public/product-img/');
     },
 
     filename: function (req, file, cb) {
+      console.log(file)
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
       cb(
         null,
@@ -94,17 +95,28 @@ export const uploadProductImage = (req, res, next) => {
     if (err) {
       res.json(err);
     } else {
-      console.log('File => ', req.files);
-      console.log('Path => ', path.dirname(req.files.path));
-      console.log(
-        'Path => ',
-        path.join(req.file.destination, req.file.filename)
-      );
-      req.body.Image = {
-        name: req.files.filename,
-        path: req.files.destination,
+      // console.log('File => ', req.files);
+      // console.log('Path => ', path.dirname(req.files.path));
+      // console.log(
+      //   'Path => ',
+      //   path.join(req.file.destination, req.file.filename)
+      // );
+      // req.body.image = {
+      //   name: req.files.filename,
+      //   path: req.files.destination,
+      //   fullPath: path.join(req.files.destination, req.files.filename),
+      // };
+
+      req.body.image =[]
+      req.files.map(file =>{
+        path.join(file.destination, file.filename);
+       imagePath = {
+        name: file.filename,
+        path: file.destination,
         fullPath: path.join(req.files.destination, req.files.filename),
-      };
+       }
+        image.append(imagePath);
+      })
       next();
     }
   });

@@ -21,14 +21,10 @@ const productSchema = new mongoose.Schema(
     },
     discountedPrice: { type: Number, trim: true, default: NaN },
 
-    
-      
-    
-
     color: {
-      name: String,
-      hex: String,
-      Image: [{ type: Object }],
+      type: ObjectId,
+      ref: 'Color',
+      required: true,
     },
     codIntern: {
       type: String,
@@ -51,14 +47,16 @@ const productSchema = new mongoose.Schema(
     },
     image: [
       {
-        type: Object,
+        type: String,
       },
     ],
-    category: [{
-      type: ObjectId,
-      ref: 'Category',
-      required: true,
-    }],
+    category: [
+      {
+        type: ObjectId,
+        ref: 'Category',
+        required: true,
+      },
+    ],
 
     content: { type: String, trim: true },
   },

@@ -29,22 +29,31 @@ import { useRouter } from "next/router";
 const AdminLayout = ({children}) =>{
 
 const router = useRouter()
-const getUserData = async(userData) =>{
+const getUserData = async() =>{
 
   try{
       const { data } = await axios.get('/current-admin');
       if(data?.ok){
         setLoading(false)
+      } else{
+         setAuth({
+           user: null,
+           token: '',
+         });
+           router.push('/');
       }
+        
     } catch(err){
       setAuth({
         user: null,
         token: '',
       });
+     
       toast.error("Unauhorized")
+      setAuth(null)
       router.push('/')
     }
-    console.log(userData)
+    console.log()
 }
 
 
@@ -63,12 +72,12 @@ const getUserData = async(userData) =>{
     }
 
     useEffect(()=>{
-      if(auth?.user){
-        getUserData(auth)
-      }
+      
+      getUserData()
+      
       
 
-    },[auth?.user])
+    },[])
 
     if(loading){
       return <ErrorComponent message="Loading..." />;

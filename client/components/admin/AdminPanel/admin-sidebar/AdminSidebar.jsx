@@ -70,8 +70,14 @@ const AdminSidebar = (props) =>{
 
     return (
       <>
-        <Nav variant={'pills'} fill defaultActiveKey={'/admin'}>
+        <Nav
+          className="d-block"
+          variant={'pills'}
+          fill
+          defaultActiveKey={'/admin'}
+        >
           <ActiveLink
+            className="d-block"
             route={'/admin'}
             current_link={current_link}
             text="Panou Administrator"
@@ -80,10 +86,16 @@ const AdminSidebar = (props) =>{
         <span className="text-black text-center font-weight-bold h5">
           Produse
         </span>
-        <Nav fill className="" variant={'pills'} defaultActiveKey="/home">
+        <Nav
+          fill
+          className="d-block"
+          variant={'pills'}
+          defaultActiveKey="/home"
+        >
           {routes.produse.map((route, idx) => {
             return (
               <ActiveLink
+                className="d-block"
                 route={route.route}
                 text={route.text}
                 current_link={current_link}
@@ -93,15 +105,26 @@ const AdminSidebar = (props) =>{
           })}
         </Nav>
         <span className="text-black text-center h5">Comenzi</span>
-        <Nav fill className="" variant={'pills'} defaultActiveKey="/home">
+        <Nav
+          fill
+          className="d-block"
+          variant={'pills'}
+          defaultActiveKey="/home"
+        >
           <ActiveLink
+            className={'d-block'}
             route={routes.comenzi[0].route}
             current_link={current_link}
             text={routes.comenzi[0].text}
           />
         </Nav>
-        <span className="text-black text-center h5">Blog</span>
-        <Nav fill className="" variant={'pills'} defaultActiveKey="/home">
+        <span className="d-block text-black text-center h5">Blog</span>
+        <Nav
+          fill
+          className="d-block"
+          variant={'pills'}
+          defaultActiveKey="/home"
+        >
           {routes.blog.map((route, idx) => {
             return (
               <ActiveLink
