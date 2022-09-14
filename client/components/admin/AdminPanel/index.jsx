@@ -4,7 +4,7 @@ import CategoryList from "./Product/CategoryList";
 import { CategoryProvider, CategoryContext } from "./Product/categoryContext/categoryContext";
 
 import { BlogCategoryContext,BlogCategoryProvider } from "./Blog/BlogCategoryContext/BlogCategoryContext";
-import BlogCategoryList from "./Blog/BlogCategoryList";
+import BlogCategoryList from './Blog/BlogCategoryList';
 import CreateBlogCategoryForm from "./Blog/CreateBlogCategoryForm";
 
 export {

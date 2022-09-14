@@ -2,6 +2,7 @@ const formidable = require('formidable');
 const _ = require('lodash');
 const fs = require('fs');
 const Product = require('../models/product');
+const { errorMonitor } = require('events');
 // const { errorHandler } = require('../helpers/dbErrorHandler');
 
 exports.productById = (req, res, next, id) => {
@@ -24,37 +25,41 @@ exports.read = (req, res) => {
 };
 
 exports.create = async (req, res) => {
-  const {
+  
+    const {
     name,
-    description,
-    discount,
-    color,
+   
+    price,
+    // color,
     size,
     category,
     codIntern,
-    image,
+    // Image,  
     content,
   } = req.body;
+//   console.log(req.body)
+//   res.send(req.body)
   console.log ("Creating product")
   const product = await new Product({
     name,
-    description,
-    discount,
-    color,
+    
+    price,
+    // color,
     size,
     category,
     codIntern,
-    image,
+    // Image,
     content,
   });
   product.save((err, data) => {
     if (err) {
       return res.status(400).json({
-        error: 'Something went wrong',
+        error: err.message,
       });
     }
 
     res.status(200).json(data);
+    console.log("Product saved")
   });
 };
 

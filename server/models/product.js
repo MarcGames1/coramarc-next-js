@@ -8,24 +8,14 @@ const productSchema = new mongoose.Schema(
       required: true,
       maxlength: 32,
     },
-    description: {
-      type: String,
-      required: true,
-      maxlength: 2000,
-    },
+
     price: {
       type: Number,
       trim: true,
       required: true,
       maxlength: 32,
     },
-    discountedPrice: { type: Number, trim: true, default: NaN },
 
-    color: {
-      type: ObjectId,
-      ref: 'Color',
-      required: true,
-    },
     codIntern: {
       type: String,
       trim: true,
@@ -45,11 +35,21 @@ const productSchema = new mongoose.Schema(
         maxlength: 3,
       },
     },
-    image: [
-      {
-        type: String,
-      },
-    ],
+    thumbnail: {
+      type: String,
+      unique: true,
+      trim: true,
+    },
+    colorVariation: {
+      required: false,
+      color: { type: ObjectId, ref: 'Color' },
+      image: [
+        {
+          type: String,
+          trim: true,
+        },
+      ],
+    },
     category: [
       {
         type: ObjectId,

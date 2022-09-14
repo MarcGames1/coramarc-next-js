@@ -59,8 +59,8 @@ const changeProduct = (item, e, product) => {
     case 'category':
       
       let currentProductCategories = product.category;
-      currentProductCategories.append(e);
-     product.category = currentProductCategories;
+     
+     product.category = [...currentProductCategories, ...e];
       break;
 
     case 'content':
