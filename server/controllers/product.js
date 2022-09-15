@@ -58,7 +58,7 @@ exports.create = async (req, res) => {
       });
     }
 
-    res.status(200).json(data);
+    res.status(200).json({data});
     console.log("Product saved")
   });
 };

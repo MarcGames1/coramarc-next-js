@@ -37,7 +37,7 @@ const productSchema = new mongoose.Schema(
     },
     thumbnail: {
       type: String,
-      unique: true,
+      
       trim: true,
     },
     colorVariation: {
@@ -54,7 +54,7 @@ const productSchema = new mongoose.Schema(
       {
         type: ObjectId,
         ref: 'Category',
-        required: true,
+        // required: true,
       },
     ],
 

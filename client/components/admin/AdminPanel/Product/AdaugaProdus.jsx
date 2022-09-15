@@ -10,14 +10,14 @@ import LoadingBtn from '../../../../components/UI/LoadingBtn';
 import axios from 'axios';
 import { AuthContext } from '../../../../context/auth';
 import Select from 'react-select';
-
+import toast from 'react-hot-toast';
 
 
 function AddProductForm() {
 
+    
     const [categories] = useContext(CategoryContext);
     const [auth] = useContext(AuthContext);
-
     const categoriesOptions = categories.map((category) => {
       return { value: category._id, label: category.name };
     });
@@ -82,7 +82,7 @@ function AddProductForm() {
         console.log(e.target.files);
       },
       category: (selectedOptions) => {
-        setProduct(product.category = selectedOptions, product);
+        setProduct({...product, category: selectedOptions.label});
         console.log('Categories ->', product);
       },
       content: (e) => {
@@ -93,22 +93,31 @@ function AddProductForm() {
     };
 
     const postProduct = async () => {
-        setProduct(( product.category = selectedOptions._id));
-        console.log(product)
-      const { data } = await axios
-        .post(`/product/create/${auth.user._id}`,  product )
-        .then((success, error) => {
-          if (success) {
-            console.log(data);
-          } else {
-            console.log(error);
-          }
-        });
+        try{
+
+          console.log(product)
+          const { data } = await axios.post(`/product/create/${auth.user._id}`,  product )
+
+           if (data?.error) {
+        setLoading(false);
+        toast.error(data.error);
+        console.log(data);
+      } else {
+        toast.success('Produs Adaugat!');
+        setLoading(false);
+        console.log(data);
+      }
+        } catch (err){
+            toast.error('error => ', err);
+            console.log(err);
+            setLoading(false);
+        }
+          
     };
 
     const handleSubmit = (e) => {
       e.preventDefault();
-      // console.log(product)
+      console.log(product)
       postProduct();
     };
 
