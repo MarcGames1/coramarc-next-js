@@ -198,7 +198,18 @@ function AddProductForm() {
             classNamePrefix="select"
           />
           <Form.Group controlId="formFileMultiple" className="mb-3">
-            <Form.Label>Multiple files input example</Form.Label>
+            <Form.Label>Poza Principala</Form.Label>
+            <Form.Control
+              onChange={(e) => {
+                e.preventDefault();
+                change.thumbnail(e);
+              }}
+              type="file"
+              accept="image/*"
+            />
+          </Form.Group>
+          <Form.Group controlId="formFileMultiple" className="mb-3">
+            <Form.Label>Alte Poze</Form.Label>
             <Form.Control type="file" accept="image/*" multiple />
           </Form.Group>
 

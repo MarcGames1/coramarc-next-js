@@ -71,17 +71,16 @@ const upload = multer({ storage: storage }).single('categoryImage');
 export const uploadProductThumbnail = (req, res, next) => {
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './public/product-cat/');
+      cb(null, './public/products/' + req.body.name);
     },
 
     filename: function (req, file, cb) {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1e9);
       cb(
         null,
-        file.originalname +
-          '-' +
-          file.fieldname +
-          '-' +
+        req.body.name +
+        '-' +
+        req.fule.fieldname +
           uniqueSuffix +
           path.extname(file.originalname)
       );
