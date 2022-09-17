@@ -129,16 +129,24 @@ exports.listRelated = (req, res) => {
         });
 };
 
-exports.listCategories = (req, res) => {
-    Product.distinct('category', {}, (err, categories) => {
-        if (err) {
-            return res.status(400).json({
-                error: 'Categories not found'
-            });
-        }
-        res.json(categories);
-    });
+exports.listCategories =  (req, res) => {
+    const categories = Product.distinct('category')
+    res.json(categories);
+
+    
+   
 };
+
+// exports.listCategories = (req, res) => {
+//   Product.distinct('category', {}, (err, categories) => {
+//     if (err) {
+//       return res.status(400).json({
+//         error: 'Categories not found',
+//       });
+//     }
+//     res.json(categories);
+//   });
+// };
 
 /**
  * list products by search
@@ -192,10 +200,9 @@ exports.listBySearch = (req, res) => {
         });
 };
 
-exports.photo = (req, res, next) => {
+exports.thumbnail = (req, res, next) => {
     if (req.product.photo.data) {
-        res.set('Content-Type', req.product.photo.contentType);
-        return res.send(req.product.photo.data);
+      //send thumbnail location
     }
     next();
 };

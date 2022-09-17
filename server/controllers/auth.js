@@ -3,6 +3,7 @@ import User from "../models/user";
 import { hashPassword, comparePassword } from "../helpers/auth";
 import jwt from "jsonwebtoken";
 import  expressjwt  from 'express-jwt' 
+import {makeid} from '../helpers/randomString'
 require('dotenv').config();
 
 
@@ -111,36 +112,38 @@ export const signout = (req, res) => {
   res.json({ message: "Signout Successfully" })
 }
 
-// export const forgotPassword = async (req, res) => {
-//   const { email } = req.body;
-//   // find user by email
-//   const user = await User.findOne({ email });
-//   console.log("USER ===> ", user);
-//   if (!user) {
-//     return res.json({ error: "User not found" });
-//   }
+export const forgotPassword = async (req, res) => {
+  const { email } = req.body;
+  console.log(email)
+  // find user by email
+  const user = await User.findOne({ email });
+  console.log("USER ===> ", user);
+  if (!user) {
+    return res.json({ error: "User not found" });
+  }
   // generate code
-  // const resetCode = nanoid(5).toUpperCase();
-  // // save to db
-  // user.resetCode = resetCode;
-  // user.save();
-  // // prepare email
-  // const emailData = {
-  //   from: process.env.EMAIL_FROM,
-  //   to: user.email,
-  //   subject: "Password reset code",
-  //   html: "<h1>Your password  reset code is: {resetCode}</h1>"
-  // };
+  const resetCode = makeid(5).toUpperCase();
+  // save to db
+  user.resetCode = resetCode;
+  user.save();
+  console.log(resetCode)
+  // prepare email
+  const emailData = {
+    from: process.env.SENDGRID_SENDER,
+    to: user.email,
+    subject: "Password reset code",
+    html: `<h1>Your password  reset code is: ${user.resetCode}</h1>`
+  };
   // send email
-//   try {
-//     const data = await sgMail.send(emailData);
-//     console.log(data);
-//     res.json({ ok: true });
-//   } catch (err) {
-//     console.log(err);
-//     res.json({ ok: false });
-//   }
-// };
+  try {
+    const data = await sgMail.send(emailData);
+    console.log(data);
+    res.json({ ok: true });
+  } catch (err) {
+    console.log(err);
+    res.json({ ok: false });
+  }
+};
 
 export const resetPassword = async (req, res) => {
   try {

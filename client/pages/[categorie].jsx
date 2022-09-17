@@ -30,7 +30,8 @@ export default function Categorie({data}) {
           <Row>
             <Col md={4} sm={6}>
               <ProductItem
-                mainImageSrc={`http://localhost:8000/product-cat/${data.Image.name}`}
+              name={"nume Produs"}
+                thumbnail={`http://localhost:8000/product-cat/${data.Image.name}`}
               />
             </Col>
           </Row>

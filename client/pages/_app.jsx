@@ -21,8 +21,11 @@ function MyApp({ Component, pageProps }) {
           <meta name="robots" content="noindex,nofollow" />
         </Head>
         <AuthProvider>
+          
+
           <Toaster />
           <Component {...pageProps} />
+          
         </AuthProvider>
       </>
     ); 

@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link';
 
 
 
@@ -7,13 +8,18 @@ import Image from 'next/image'
 //mainImageSrc: imaginea principala - url absolut 356 x 265
 
 
-export default function ProductItem({name, mainImageSrc}) {
+export default function ProductItem({ name, thumbnail, pret }) {
+
+  let productUrl = `/produse/${name.replace(' ', '-').toLowerCase()}`;
+
+
   return (
+
     <div>
       <div class="product-item">
         <div class="product-thumb">
           <a href="product-details.html">
-            <Image src={mainImageSrc} alt={name} width={350} height={265} />
+            <Image src={thumbnail} alt={name} width={350} height={265} />
           </a>
           <div class="button-group">
             <a
@@ -29,41 +35,21 @@ export default function ProductItem({name, mainImageSrc}) {
               </span>
             </a>
           </div>
-          <div class="product-label">
-            <span>new</span>
-          </div>
         </div>
         <div class="product-content">
           <div class="product-caption">
             <h6 class="product-name">
-              <a href="product-details.html">Leather Mens slippers</a>
+              <Link href={productUrl}>
+              <a href={productUrl}>{name}</a>
+              </Link>
+
             </h6>
             <div class="price-box">
-              <span class="price-old">
-                <del>$70.00</del>
-              </span>
-              <span class="price-regular">$50.00</span>
+              <span class="price-regular">{pret}</span>
             </div>
             <a class="add-to-cart" href="cart.html">
               <i class="fa fa-shopping-cart"></i>
             </a>
-          </div>
-          <div class="ratings">
-            <span>
-              <i class="fa fa-star"></i>
-            </span>
-            <span>
-              <i class="fa fa-star"></i>
-            </span>
-            <span>
-              <i class="fa fa-star"></i>
-            </span>
-            <span>
-              <i class="fa fa-star"></i>
-            </span>
-            <span>
-              <i class="fa fa-star"></i>
-            </span>
           </div>
         </div>
       </div>

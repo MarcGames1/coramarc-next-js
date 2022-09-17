@@ -1,4 +1,4 @@
-import { useContext } from "react"
+import { useContext, useEffect, useState } from "react"
 import { MobileContext } from '../../context/MobileMenuToggleContext/mobileMenuToggleContext'
 import { CategoryContext } from '../admin/AdminPanel';
 import NavElement from "../Header and Footer/Header/NavElement";
@@ -11,8 +11,12 @@ const OffCanvasMobileMenu = () =>{
     const [open, handleClose] =useContext(MobileContext)
  const [categories, getCategories] = useContext(CategoryContext);
 
+ const[currentCategories, setCurrentCategories] = useState([])
  const router = useRouter()
 
+ useEffect(()=>{
+ setCurrentCategories (getCategories())
+ },[])
 
     return (
       <>
@@ -42,23 +46,17 @@ const OffCanvasMobileMenu = () =>{
                 <nav>
                   <ul className="mobile-menu">
                     <MenuItemChildren name={'Acasa'} href={'/'}>
-                     
-                      
-                        {categories?.map((cat) => {
-                          return (
-                            <NavElement
-                              key={cat._id}
-                              active={`/${cat.slug}` === router.asPath}
-                              text={cat.name}
-                              href={`/${cat.slug}`}
-                            />
-                          );
-                        })}
-                     
+                      {currentCategories?.map((cat) => {
+                        return (
+                          <NavElement
+                            key={cat._id}
+                            active={`/${cat.slug}` === router.asPath}
+                            text={cat.name}
+                            href={`/${cat.slug}`}
+                          />
+                        );
+                      })}
                     </MenuItemChildren>
-
-                  
-                   
                   </ul>
                 </nav>
                 {/* <!-- mobile menu navigation end --> */}
@@ -70,30 +68,7 @@ const OffCanvasMobileMenu = () =>{
                   <li>
                     <div className="dropdown mobile-top-dropdown">
                       <a
-                        href="#"
-                        className="dropdown-toggle"
-                        id="currency"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        Currency
-                        <i className="fa fa-angle-down"></i>
-                      </a>
-                      <div className="dropdown-menu" aria-labelledby="currency">
-                        <a className="dropdown-item" href="#">
-                          $ USD
-                        </a>
-                        <a className="dropdown-item" href="#">
-                          $ EURO
-                        </a>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="dropdown mobile-top-dropdown">
-                      <a
-                        href="#"
+                        href="/login-register"
                         className="dropdown-toggle"
                         id="myaccount"
                         data-bs-toggle="dropdown"
@@ -103,21 +78,6 @@ const OffCanvasMobileMenu = () =>{
                         My Account
                         <i className="fa fa-angle-down"></i>
                       </a>
-                      <div
-                        className="dropdown-menu"
-                        aria-labelledby="myaccount"
-                      >
-                        <a className="dropdown-item" href="my-account.html">
-                          my account
-                        </a>
-                        <a className="dropdown-item" href="login-register.html">
-                          {' '}
-                          login
-                        </a>
-                        <a className="dropdown-item" href="login-register.html">
-                          register
-                        </a>
-                      </div>
                     </div>
                   </li>
                 </ul>
@@ -129,11 +89,13 @@ const OffCanvasMobileMenu = () =>{
                   <ul>
                     <li>
                       <i className="fa fa-mobile"></i>
-                      <a href="#">0123456789</a>
+                      <a href="tel:0741203322">0741203322</a>
                     </li>
                     <li>
                       <i className="fa fa-envelope-o"></i>
-                      <a href="#">info@yourdomain.com</a>
+                      <a href="mailto:contact@coramarc.ro">
+                        contact@coramarc.ro
+                      </a>
                     </li>
                   </ul>
                 </div>
