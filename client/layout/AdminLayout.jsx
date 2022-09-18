@@ -15,9 +15,9 @@ const SidebarMenu = (props) => (
     <AdminSidebar toggleMenu={props.toggleMenu} />
   </Col>
 );
+import Header from '../components/Header and Footer/Header';
 
 
-import Header from '../Components/Header and Footer/Header';
 import { ScrollPositionProvider } from "../context/ScrollPositionContext/ScrollPositionContext";
 import axios from "axios";
 import toast from "react-hot-toast";
