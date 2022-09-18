@@ -5,13 +5,13 @@ import { Col } from 'react-bootstrap';
 import path from 'path';
 import Link from 'next/link'
 import styles from './CategoriesSection.module.css';
-
+import Image from 'next/image';
 
 
 const ServerLocation = 'http://localhost:8000/product-cat/';
-export const CategoriesSection = ({name, Image,slug}) => {
+export const CategoriesSection = ({name, Image:img,slug}) => {
     
-  console.log(path.join(Image.fullPath));
+  
   
     return (
       <>
@@ -19,7 +19,7 @@ export const CategoriesSection = ({name, Image,slug}) => {
           <Link href={slug}>
             <a href={slug}>
               <Card className={styles.card + ' bg-white text-dark'}>
-                <Card.Img src={ServerLocation + Image.name} alt={name} />
+              <Image width={350} height={265} layout='responsive' src={ServerLocation + img.name} alt={name} />
                 <Card.ImgOverlay>
                   <Card.Title className="text-center">{name}</Card.Title>
                 </Card.ImgOverlay>
@@ -29,4 +29,5 @@ export const CategoriesSection = ({name, Image,slug}) => {
         </Col>
       </>
     );
-}
+  }
+                

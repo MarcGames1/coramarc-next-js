@@ -122,17 +122,17 @@ export const forgotPassword = async (req, res) => {
     return res.json({ error: "User not found" });
   }
   // generate code
-  const resetCode = makeid(5).toUpperCase();
+  
   // save to db
-  user.resetCode = resetCode;
+  user.resetCode = makeid(5).toUpperCase();;
   user.save();
-  console.log(resetCode)
+  
   // prepare email
   const emailData = {
     from: process.env.SENDGRID_SENDER,
     to: user.email,
-    subject: "Password reset code",
-    html: `<h1>Your password  reset code is: ${user.resetCode}</h1>`
+    subject: "Resetare Parola Coramarc.ro",
+    html: `<h1>Codul pentru resetarea parolei este: ${user.resetCode}</h1>`
   };
   // send email
   try {

@@ -4,6 +4,13 @@ import { CategoryContext } from '../admin/AdminPanel';
 import NavElement from "../Header and Footer/Header/NavElement";
 import { useRouter } from 'next/router';
 import MenuItemChildren from "./offCanvasMenuComponents/menuItemChildren";
+import {dateFirma} from '../../helpers/setari'
+import dynamic from "next/dynamic";
+const FontAwesomeIcon = dynamic(
+  async () => (await import('@fortawesome/react-fontawesome')).FontAwesomeIcon
+);
+
+import { faClose, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 
 const OffCanvasMobileMenu = () =>{
@@ -14,6 +21,8 @@ const OffCanvasMobileMenu = () =>{
  const[currentCategories, setCurrentCategories] = useState([])
  const router = useRouter()
 
+
+ console.log(currentCategories)
  useEffect(()=>{
  setCurrentCategories (getCategories())
  },[])
@@ -25,7 +34,7 @@ const OffCanvasMobileMenu = () =>{
           <div onClick={handleClose} className="off-canvas-overlay"></div>
           <div className="off-canvas-inner-content">
             <div onClick={handleClose} className="btn-close-off-canvas">
-              <i className="fa fa-close"></i>
+              <FontAwesomeIcon icon={faClose} />
             </div>
 
             <div className="off-canvas-inner">
@@ -34,7 +43,7 @@ const OffCanvasMobileMenu = () =>{
                 <form>
                   <input type="text" placeholder="Search Here..." />
                   <button className="search-btn">
-                    <i className="fa fa-search"></i>
+                    <FontAwesomeIcon icon={faSearch} />
                   </button>
                 </form>
               </div>
