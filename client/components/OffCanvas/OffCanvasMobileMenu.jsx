@@ -1,32 +1,46 @@
 import { useContext, useEffect, useState } from "react"
 import { MobileContext } from '../../context/MobileMenuToggleContext/mobileMenuToggleContext'
-import { CategoryContext } from '../admin/AdminPanel';
+import { CategoryContext } from '../admin/AdminPanel/Product/categoryContext/categoryContext';
 import NavElement from "../Header and Footer/Header/NavElement";
 import { useRouter } from 'next/router';
 import MenuItemChildren from "./offCanvasMenuComponents/menuItemChildren";
 import {dateFirma} from '../../helpers/setari'
+
 import dynamic from "next/dynamic";
 const FontAwesomeIcon = dynamic(
   async () => (await import('@fortawesome/react-fontawesome')).FontAwesomeIcon
 );
 
-import { faClose, faSearch } from '@fortawesome/free-solid-svg-icons';
+import {
+  faClose,
+  faSquareEnvelope,
+  faPhone,
+  faSearch,
+} from '@fortawesome/free-solid-svg-icons';
+import { UserSocialLinks } from "../Header and Footer/Header/components";
+import { faEnvelope } from "@fortawesome/free-regular-svg-icons";
+import Link from "next/link";
 
 
 const OffCanvasMobileMenu = () =>{
 
     const [open, handleClose] =useContext(MobileContext)
- const [categories, getCategories] = useContext(CategoryContext);
+    const [categories, setCategories] = useContext(CategoryContext);
+    const [loading, setLoading] = useState(true)
+    const currentCategories = []
 
- const[currentCategories, setCurrentCategories] = useState([])
+    useEffect(() => {
+      currentCategories.push(...categories);
+      console.log(currentCategories);
+    }, [currentCategories]);
  const router = useRouter()
 
 
- console.log(currentCategories)
- useEffect(()=>{
- setCurrentCategories (getCategories())
- },[])
+ console.log('Current Categories are ->', currentCategories);
+ console.log("Current Categories are ->", typeof categories)
+ 
 
+ if (!categories) return <div>Loading...</div>;
     return (
       <>
         {/* <!-- off-canvas menu start --> */}
@@ -50,80 +64,49 @@ const OffCanvasMobileMenu = () =>{
               {/* <!-- search box end --> */}
 
               {/* <!-- mobile menu start --> */}
+
+              {/* <!-- mobile menu navigation start --> */}
               <div className="mobile-navigation">
-                {/* <!-- mobile menu navigation start --> */}
-                <nav>
-                  <ul className="mobile-menu">
-                    <MenuItemChildren name={'Acasa'} href={'/'}>
-                      {currentCategories?.map((cat) => {
-                        return (
-                          <NavElement
-                            key={cat._id}
-                            active={`/${cat.slug}` === router.asPath}
-                            text={cat.name}
-                            href={`/${cat.slug}`}
-                          />
-                        );
-                      })}
-                    </MenuItemChildren>
+                <nav className="mobile-menu">
+                  <ul>
+                    {categories?.map((cat) => {
+                      return (
+                        <NavElement
+                          key={cat._id}
+                          active={`/${cat.slug}` === router.asPath}
+                          text={cat.name}
+                          href={`/${cat.slug}`}
+                        />
+                      );
+                    })}
                   </ul>
                 </nav>
-                {/* <!-- mobile menu navigation end --> */}
-              </div>
-              {/* <!-- mobile menu end --> */}
-
-              <div className="mobile-settings">
-                <ul className="nav">
-                  <li>
-                    <div className="dropdown mobile-top-dropdown">
-                      <a
-                        href="/login-register"
-                        className="dropdown-toggle"
-                        id="myaccount"
-                        data-bs-toggle="dropdown"
-                        aria-haspopup="true"
-                        aria-expanded="false"
-                      >
-                        My Account
-                        <i className="fa fa-angle-down"></i>
-                      </a>
-                    </div>
-                  </li>
-                </ul>
               </div>
 
-              {/* <!-- offcanvas widget area start --> */}
               <div className="offcanvas-widget-area">
+                {/* <!-- mobile menu navigation end --> */}
+
+                {/* <!-- mobile menu end --> */}
+
+                {/* <!-- offcanvas widget area start --> */}
                 <div className="off-canvas-contact-widget">
                   <ul>
                     <li>
-                      <i className="fa fa-mobile"></i>
-                      <a href="tel:0741203322">0741203322</a>
+                      <a href={`tel:${dateFirma.contact.telefon}`}>
+                        <FontAwesomeIcon icon={faPhone} />{' '}
+                        {dateFirma.contact.telefon}
+                      </a>
                     </li>
                     <li>
-                      <i className="fa fa-envelope-o"></i>
-                      <a href="mailto:contact@coramarc.ro">
-                        contact@coramarc.ro
+                      <a href={`mailto:${dateFirma.contact.email}`}>
+                        <FontAwesomeIcon icon={faEnvelope} />{' '}
+                        {dateFirma.contact.email}
                       </a>
                     </li>
                   </ul>
                 </div>
                 <div className="off-canvas-social-widget">
-                  <a href="#">
-                    <i className="fa fa-facebook"></i>
-                  </a>
-                  <a href="#">
-                    <i className="fa fa-twitter"></i>
-                  </a>
-                  <a href="#">
-                    <i className="fa fa-pinterest-p"></i>
-                  </a>
-                  <a href="#">
-                    <i className="fa fa-linkedin"></i>
-                  </a>
-                  <a href="#">
-                    <i className="fa fa-youtube-play"></i>
-                  </a>
+                  <UserSocialLinks />
                 </div>
               </div>
               {/* <!-- offcanvas widget area end --> */}

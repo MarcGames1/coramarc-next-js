@@ -6,6 +6,8 @@ import Image from 'next/image'
 import styles from './mainFooter.module.css'
 import FooterPartner from "./mainfooter.components/partner"
 import { dateComert, dateFirma } from "../../../helpers/setari"
+
+
 function MainFooter() {
 
 
@@ -173,10 +175,10 @@ function MainFooter() {
                         <a
                           rel="nofollow"
                           target={'_blank'}
-                          href="https://goo.gl/maps/X8skha7UCdQSJrP18"
+                          href={dateFirma.punctDeLucru.gmbnav}
                         >
-                          {dateFirma.sediu}
-                          {''} Jud. {dateFirma.judet}
+                          {dateFirma.punctDeLucru.adresa}
+                          
                         </a>
                       </p>
                     </address>
@@ -242,37 +244,37 @@ function MainFooter() {
               </Row>
               <Row className={styles.parteneri}>
                 <Col>
-                <FooterPartner
-                  src="https://www.librabank.ro/english/images/logo-libra.png"
-                  width={231}
-                  height={41}
-                  alt="Logo Libra Internet Bank"
+                  <FooterPartner
+                    src="https://www.librabank.ro/english/images/logo-libra.png"
+                    width={231}
+                    height={41}
+                    alt="Logo Libra Internet Bank"
                   />
-                  </Col>
-                  <Col>
-                <FooterPartner
-                  src="https://www.fancourier.ro/wp-content/themes/fancourier/images/logo.png"
-                  width={126}
-                  height={76}
-                  alt="Logo FanCourier"
+                </Col>
+                <Col>
+                  <FooterPartner
+                    src="https://www.fancourier.ro/wp-content/themes/fancourier/images/logo.png"
+                    width={126}
+                    height={76}
+                    alt="Logo FanCourier"
                   />
-                  </Col>
-                  <Col>
-                <FooterPartner
-                  src="/assets/img/visa.svg"
-                  width={231}
-                  height={41}
-                  alt="Logo Visa"
+                </Col>
+                <Col>
+                  <FooterPartner
+                    src="/assets/img/visa.svg"
+                    width={231}
+                    height={41}
+                    alt="Logo Visa"
                   />
-                  </Col>
-                  <Col>
-                <FooterPartner
-                  src="/assets/img/mastercard.svg"
-                  width={231}
-                  height={41}
-                  alt="Logo mastercard"
+                </Col>
+                <Col>
+                  <FooterPartner
+                    src="/assets/img/mastercard.svg"
+                    width={231}
+                    height={41}
+                    alt="Logo mastercard"
                   />
-                  </Col>
+                </Col>
               </Row>
               <Row>
                 <Col>

@@ -29,7 +29,7 @@ const CategoryProvider = ({ children }) => {
   }, []);
 
   return (
-    <CategoryContext.Provider value={[categories, setCategories, getCategories]}>
+    <CategoryContext.Provider value={[categories, setCategories]}>
       {children}
     </CategoryContext.Provider>
   );

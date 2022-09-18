@@ -24,7 +24,7 @@ import CategoryListElement from './CategoryListElement';
 
 
 const CategoryList = () => {
-  const [categories, setCategories, getCategories] = useContext(CategoryContext);
+  const [categories, setCategories] = useContext(CategoryContext);
 
 
  
