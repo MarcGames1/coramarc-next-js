@@ -1,21 +1,9 @@
-import useSWR from 'swr';
 
 import dynamic from 'next/dynamic';
 const FontAwesomeIcon = dynamic(
   async () => (await import('@fortawesome/react-fontawesome')).FontAwesomeIcon
 );
-import { faCircleXmark } from '@fortawesome/free-solid-svg-icons';
-import {
-  Col,
-  Row,
-  ListGroup,
-  Button,
-  ButtonGroup,
-  Container,
-  Alert,
-} from 'react-bootstrap';
-import axios from 'axios';
-import { useState, useEffect, useContext } from 'react';
+import { useContext } from 'react';
 import { AuthContext } from '../../../../context/auth';
 import { CategoryContext } from './categoryContext/categoryContext';
 import CategoryListElement from './CategoryListElement';

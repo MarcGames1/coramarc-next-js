@@ -8,7 +8,7 @@ import styles from './CategoriesSection.module.css';
 import Image from 'next/image';
 
 
-const ServerLocation = 'http://localhost:8000/product-cat/';
+const ServerLocation = `${process.env.SERVER}/api/categories/`;
 export const CategoriesSection = ({name, Image:img,slug}) => {
     
   

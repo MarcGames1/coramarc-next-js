@@ -24,14 +24,14 @@ export default function Categorie({data}) {
       <CategoryLayiout>
         <BreadcrumbTitle
           title={data.name}
-          img={`http://localhost:8000/product-cat/title.jpg`}
+          img={`${process.env.SERVER}/product-cat/title.jpg`}
         />
         <Container>
           <Row>
             <Col md={4} sm={6}>
               <ProductItem
-              name={"nume Produs"}
-                thumbnail={`http://localhost:8000/product-cat/${data.Image.name}`}
+                name={'nume Produs'}
+                thumbnail={`${process.env.SERVER}/product-cat/${data.Image.name}`}
               />
             </Col>
           </Row>
@@ -45,7 +45,7 @@ export default function Categorie({data}) {
 
 
 export async function getStaticProps(context) {
-  const response = await fetch('http://localhost:8000/api/categories/');
+  const response = await fetch(`${process.env.SERVER}/api/categories/`);
   const data = await response.json();
   const currentSlug = context.params.categorie;
   let currentCat = data.filter(cat =>{
@@ -62,7 +62,7 @@ export async function getStaticProps(context) {
 }
 
 export async function getStaticPaths() {
-  const response = await fetch('http://localhost:8000/api/categories/');
+  const response = await fetch(`${process.env.SERVER}/api/categories/`);
   const data = await response.json();
   
   const paths = data.map(cat =>{

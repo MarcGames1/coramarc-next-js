@@ -38,7 +38,7 @@ export default function UpdateProductCategory(props) {
 
   
 console.log(currentCategory.image.name)
-let productCatUri = 'http://localhost:8000/product-cat/';
+let productCatUri = `${process.env.SERVER_PRODUCT_CAT}`;
 // console.log('IMAGE URI =>', imageURI);
   return (
     <>
