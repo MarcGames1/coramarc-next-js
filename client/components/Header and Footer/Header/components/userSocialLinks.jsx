@@ -1,5 +1,7 @@
 import { dateFirma } from "../../../../helpers/setari";
+
 export const UserSocialLinks = () => {
+  console.log(dateFirma)
   return (
     <>
       <div className="header-social-link">

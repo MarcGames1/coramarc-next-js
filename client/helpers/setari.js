@@ -11,7 +11,7 @@ export const dateFirma = {
     email: 'contact@coramarc.ro',
   },
   social: {
-    facebook: 'facebook.com',
+    facebook: 'https://www.facebook.com/profile.php?id=100083132509860',
     instagram: 'instagram.com',
     pinterest: 'pinterest.com',
     youtube: 'youtube.com',
