@@ -40,7 +40,7 @@ export default function Home({data}) {
 export async function getStaticProps(){
   const response = await fetch(`${process.env.API}/categories/`);
   const data = await response.json();
-  console.log(data)
+  
   return{
     props:{
       data

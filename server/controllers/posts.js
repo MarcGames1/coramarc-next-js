@@ -8,10 +8,10 @@ import slugify from 'slugify';
 
 export const create = (req, res) => {
 
-  console.log("REQ BODY =>",req.body)
+
 
   const {title, content, categories, Image} = req.body
-  console.log("title ",req.body.title)
+ 
  let post_slug = slugify(req.body.title)
  let post = new Post({
    title,
@@ -22,7 +22,7 @@ export const create = (req, res) => {
  });
  post.save((err, data)=>{
   if(err){
-     console.log(err);
+    
      return res.status(500).json({error: err});
    }if(data){
     res.status(200).json({success: true})
@@ -39,19 +39,19 @@ export const create = (req, res) => {
 
 
 export const update = () => {
-  console.log('post Updated');
+ 
 };
 
 export const remove = () => {
-  console.log('post Removed');
+
 };
 
 export const list = () => {
-  console.log('all posts showed here');
+ 
 };
 
 export const postById = (req, res, next, id) => {
-  console.log('getPost by Id');
+
   Post.findById(id).exec((err, post) => {
     if (err || !Post) {
       res.status(400).json({
@@ -64,5 +64,5 @@ export const postById = (req, res, next, id) => {
 };
 
 export const read = () => {
-  console.log('reading Posts');
+
 };

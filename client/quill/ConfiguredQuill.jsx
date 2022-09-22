@@ -10,7 +10,7 @@ const ReactQuill = dynamic(import('react-quill'), {
 
 const ConfiguredQuill = (props) => {
 
-  console.log("QUILL", ReactQuill)
+ 
   const formats = [
     'header',
     'bold',

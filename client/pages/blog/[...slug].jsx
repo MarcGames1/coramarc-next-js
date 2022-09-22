@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 const Blog_cat = () => {
 const router = useRouter()
-console.log(router)
+
     const slug  = router.asPath
     return (<>
         <MainLayout>

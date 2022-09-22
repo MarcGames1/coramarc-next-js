@@ -46,8 +46,7 @@ exports.update = (req,res) =>{
     //delete previous image
     if(category.Image !== req.body.image){
         fs.unlink(`${category.Image.path}${category.Image.name}`, (err) => {
-          console.log(err);
-          console.log(category.Image.path, '/ ', category.Image.name);
+      
         });
     }
     category.Image = req.body.Image
@@ -64,10 +63,9 @@ exports.update = (req,res) =>{
 
 exports.remove = (req, res) => {
     const category = req.category
-    console.log(category)
+    
     fs.unlink(`${category.Image.path}${category.Image.name}`, (err)=>{
-        console.log(err)
-        console.log(category.Image.path, '/ ', category.Image.name);
+    
     });
     category.remove((err, data) => {
         if(err) {

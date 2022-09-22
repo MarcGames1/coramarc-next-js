@@ -6,11 +6,10 @@ import path from 'path';
 import Link from 'next/link'
 import styles from './CategoriesSection.module.css';
 import Image from 'next/image';
+import {apiData} from '../../helpers/setari'
 
-
-const ServerLocation = `${process.env.SERVER}/api/categories/`;
 export const CategoriesSection = ({name, Image:img,slug}) => {
-    
+    console.log(process.env.SERVER)
   
   
     return (
@@ -19,7 +18,7 @@ export const CategoriesSection = ({name, Image:img,slug}) => {
           <Link href={slug}>
             <a href={slug}>
               <Card className={styles.card + ' bg-white text-dark'}>
-              <Image width={350} height={265} layout='responsive' src={ServerLocation + img.name} alt={name} />
+                <Image width={350} height={265} layout='responsive' src={`${apiData.productCategoriesPhoto}${img.name}`} alt={name} />
                 <Card.ImgOverlay>
                   <Card.Title className="text-center">{name}</Card.Title>
                 </Card.ImgOverlay>

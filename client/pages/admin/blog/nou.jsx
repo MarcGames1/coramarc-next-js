@@ -131,7 +131,7 @@ if(typeof(bodyFormData)=== 'undefined'){
 
     submit:(e) =>{
       e.preventDefault();
-     console.log(e?.file)
+     
     }
   };
 

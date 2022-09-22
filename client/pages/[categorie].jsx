@@ -9,7 +9,7 @@ import Image from 'next/image';
 import BreadcrumbTitle from '../components/UI/BreadcrumbTitle';
 import { Container, Row, Col } from 'react-bootstrap';
 import ProductItem from '../components/product/Product-item';
-
+import { apiData } from '../helpers/setari';
 
 export default function Categorie({data}) {
 
@@ -31,7 +31,7 @@ export default function Categorie({data}) {
             <Col md={4} sm={6}>
               <ProductItem
                 name={'nume Produs'}
-                thumbnail={`${process.env.SERVER}/product-cat/${data.Image.name}`}
+                thumbnail={`${apiData.productCategoriesPhoto}/${data.Image.name}`}
               />
             </Col>
           </Row>

@@ -70,7 +70,7 @@ export const signup = async (req, res) => {
 };
 
 export const signin = async (req, res) => {
-  console.log(req.body);
+  
   try {
     const { email, password } = req.body;
     // check if our db has user with that email
@@ -102,7 +102,7 @@ export const signin = async (req, res) => {
       user,
     });
   } catch (err) {
-    console.log(err);
+   
     return res.status(400).send("Error. Try again.");
   }
 };
@@ -114,10 +114,10 @@ export const signout = (req, res) => {
 
 export const forgotPassword = async (req, res) => {
   const { email } = req.body;
-  console.log(email)
+ 
   // find user by email
   const user = await User.findOne({ email });
-  console.log("USER ===> ", user);
+ 
   if (!user) {
     return res.json({ error: "User not found" });
   }
@@ -167,7 +167,7 @@ export const resetPassword = async (req, res) => {
     user.save();
     return res.json({ ok: true });
   } catch (err) {
-    console.log(err);
+    
   }
 };
 
@@ -183,7 +183,7 @@ export const isAuth = async (req, res, next) => {
       next()
      }
   } catch (err) {
-    console.log (err);
+   
     return res.status(500).json({ error: err})
   }
 };
@@ -197,7 +197,7 @@ export const isAdmin = async (req, res, next) => {
       next();
     }
   } catch (err) {
-    console.log(err);
+    
   }
 };
 
@@ -213,6 +213,6 @@ export const currentUser = async (req, res) => {
     const user = await User.findById(req.user._id);
     res.json({ ok: true });
   } catch (err) {
-    console.log(err);
+   
   }
 };

@@ -54,9 +54,7 @@ const upload = multer({ storage: storage }).single('categoryImage');
        if (err) {
          res.json(err);
        } else {
-         console.log("File => ", req.file);
-        console.log('Path => ', path.dirname(req.file.path));
-        console.log('Path => ', path.join(req.file.destination, req.file.filename))
+   
         req.body.Image = {
           name: req.file.filename,
           path: req.file.destination,
@@ -93,12 +91,7 @@ export const uploadProductThumbnail = (req, res, next) => {
     if (err) {
       res.json(err);
     } else {
-      console.log('File => ', req.file);
-      console.log('Path => ', path.dirname(req.file.path));
-      console.log(
-        'Path => ',
-        path.join(req.file.destination, req.file.filename)
-      );
+
       req.body.Image = {
         name: req.file.filename,
         path: req.file.destination,

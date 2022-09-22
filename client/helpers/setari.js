@@ -31,4 +31,8 @@ export const dateComert={
 
 }
 
+
+export const apiData = {
+  productCategoriesPhoto: 'http://localhost:8000/product-cat/',
+};
 // export const numeSite = 'https://coramarc.ro';

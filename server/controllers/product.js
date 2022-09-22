@@ -39,7 +39,7 @@ exports.create = async (req, res) => {
   } = req.body;
 //   console.log(req.body)
 //   res.send(req.body)
-  console.log ("Creating product")
+  
   const product = await new Product({
     name,
     
@@ -59,7 +59,7 @@ exports.create = async (req, res) => {
     }
 
     res.status(200).json({data});
-    console.log("Product saved")
+ 
   });
 };
 
@@ -163,8 +163,7 @@ exports.listBySearch = (req, res) => {
     let skip = parseInt(req.body.skip);
     let findArgs = {};
 
-    // console.log(order, sortBy, limit, skip, req.body.filters);
-    // console.log("findArgs", findArgs);
+ 
 
     for (let key in req.body.filters) {
         if (req.body.filters[key].length > 0) {
