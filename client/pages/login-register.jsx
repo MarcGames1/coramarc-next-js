@@ -18,10 +18,7 @@ useEffect(()=>{
     return (
       <MainLayout>
         <div className="login-register-wrapper ">
-          <div className="bg-primary w-100 h-100 section-padding ">
-        
-            <h1 className="text-center">Text</h1>
-          </div>
+          
           <Container>
             <div class="member-area-from-wrap">
               <Row
